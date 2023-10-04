@@ -1,13 +1,11 @@
 const axios = require("axios");
 
 const obtenerInformacionPokemon = async (response) => {
-  //   console.log(response);
   const pokemonInfo = [];
 
   for (const pokemon of response) {
     try {
       const response = await axios.get(pokemon.url);
-      //   const pokemonInfo = response.data;
       pokemonInfo.push(response.data);
     } catch (error) {
       console.error(
@@ -15,32 +13,36 @@ const obtenerInformacionPokemon = async (response) => {
       );
     }
   }
-const pokemonId = informaciónPokemonById(pokemonInfo)
-return pokemonId;
+  const pokemonId = informaciónPokemonById(pokemonInfo);
+  return pokemonId;
 };
 
 const informaciónPokemonById = (response) => {
   const pokemonId = response.map((pok) => {
-    const pokHp = pok.stats.filter((stat) => stat.stat.name === "hp");
-    const hp = pokHp.map((stat) => stat.base_stat);
+    const hp =
+      pok.stats.find((stat) => stat.stat.name === "hp")?.base_stat ||
+      `Este pokemon no tiene ${base_stat}`;
 
-    const pokDefen = pok.stats.filter((stat) => stat.stat.name === "defense");
-    const def = pokDefen.map((stat) => stat.base_stat);
+    const def =
+      pok.stats.find((stat) => stat.stat.name === "defense")?.base_stat ||
+      `Este pokemon no tiene ${base_stat}`;
 
-    const pokAttack = pok.stats.filter((stat) => stat.stat.name === "attack");
-    const att = pokAttack.map((stat) => stat.base_stat);
+    const att =
+      pok.stats.find((stat) => stat.stat.name === "attack")?.base_stat ||
+      `Este pokemon no tiene ${base_stat}`;
 
-    const pokSpeed = pok.stats.filter((stat) => stat.stat.name === "speed");
-    const speed = pokSpeed.map((stat) => stat.base_stat);
+    const speed =
+      pok.stats.find((stat) => stat.stat.name === "speed")?.base_stat ||
+      `Este pokemon no tiene ${base_stat}`;
 
     const pokemonId = {
       id: pok.id,
       nombre: pok.name,
-      imagen: "Aca va la imagen",
-      vida: hp[0],
-      ataque: att[0],
-      defensa: def[0],
-      velocidad: speed[0],
+      imagen: pok.sprites.other.dream_world.front_default,
+      vida: hp,
+      ataque: att,
+      defensa: def,
+      velocidad: speed,
       altura: pok.height,
       peso: pok.weight,
       types: pok.types.map((type) => type.type.name),
@@ -51,34 +53,3 @@ const informaciónPokemonById = (response) => {
 };
 
 module.exports = { obtenerInformacionPokemon, informaciónPokemonById };
-
-
-//   const pokemonId = pokemonInfo.map((pok) => {
-
-//     const pokHp = pok.stats.filter((stat) => stat.stat.name === "hp");
-//     const hp = pokHp.map((stat) => stat.base_stat);
-
-//     const pokDefen = pok.stats.filter((stat) => stat.stat.name === "defense");
-//     const def = pokDefen.map((stat) => stat.base_stat);
-
-//     const pokAttack = pok.stats.filter((stat) => stat.stat.name === "attack");
-//     const att = pokAttack.map((stat) => stat.base_stat);
-
-//     const pokSpeed = pok.stats.filter((stat) => stat.stat.name === "speed");
-//     const speed = pokSpeed.map((stat) => stat.base_stat);
-
-//     const pokemonId = {
-//       id: pok.id,
-//       nombre: pok.name,
-//       imagen: "Aca va la imagen",
-//       vida: hp[0],
-//       ataque: att[0],
-//       defensa: def[0],
-//       velocidad: speed[0],
-//       altura: pok.height,
-//       peso: pok.weight,
-//       types: pok.types.map((type) => type.type.name),
-//     };
-//     return pokemonId;
-//   });
-

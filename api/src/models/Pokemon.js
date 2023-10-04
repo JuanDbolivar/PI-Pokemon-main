@@ -18,16 +18,16 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
     },
     vida: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
     },
     ataque: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
     },
     defensa: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
     },
     velocidad: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
     },
     altura: {
       type: DataTypes.INTEGER,
