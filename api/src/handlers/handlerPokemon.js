@@ -42,6 +42,7 @@ const obtenerInformacionPokemon = async (response, query) => {
 
 //*************************************************************** */
 
+ //* organizando info
 const informaciónPokemonById = async (pokemons) => {
   const pokemonId = pokemons.map((pok) => {
     const hp =
@@ -79,6 +80,7 @@ const informaciónPokemonById = async (pokemons) => {
 
 //*************************************************************** */
 
+//* posteo de pokemons
 const postearPokemons = async ({
   nombre,
   imagen,

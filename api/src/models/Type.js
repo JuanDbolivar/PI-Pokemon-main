@@ -1,4 +1,4 @@
-const { DataTypes } = require("sequelize");
+const { DataTypes, INTEGER } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
@@ -6,8 +6,8 @@ module.exports = (sequelize) => {
     {
       // es un array llamado types
       id: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
+        type: INTEGER,
+        // defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
       },
       nombre: {

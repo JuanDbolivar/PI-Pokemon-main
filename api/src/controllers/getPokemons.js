@@ -9,7 +9,7 @@ const getPokemons = async (req, res) => {
     const { name } = req.query;
     const { data } = await axios(URL);
     const response = data.results;
-    const pokemon = await obtenerInformacionPokemon(response,  name );
+    const pokemon = await obtenerInformacionPokemon(response, name);
     res.status(200).json(pokemon);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -17,12 +17,3 @@ const getPokemons = async (req, res) => {
 };
 
 module.exports = getPokemons;
-
-// try {
-//   const { data } = await axios(URL);
-//   const response = data.results;
-//   const pokemon = await obtenerInformacionPokemon(response);
-//   res.status(200).json(pokemon);
-// } catch (error) {
-//   res.status(500).json({ error: error.message });
-// }
