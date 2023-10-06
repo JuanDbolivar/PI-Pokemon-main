@@ -1,16 +1,17 @@
 const axios = require("axios");
+const { Pokemon, Type } = require("../db");
 
 const obtenerInformacionPokemon = async (response, query) => {
   //* pokemon por query
   if (query) {
     query = query.toLowerCase().trim();
-    response = response.filter((res) => res.name == query);
+    response = response.filter((res) => res.name === query);
     if (response.length !== 0) {
       const pokemonInfo = [];
       const pokemon = response.map((pok) => pok.url);
       try {
-        const responses = await axios.get(pokemon);
-        pokemonInfo.push(responses.data);
+        const queryResponse = await axios.get(pokemon);
+        pokemonInfo.push(queryResponse.data);
       } catch (error) {
         console.error(
           `No se pudo obtener información de ${pokemon.name}: ${error.message}`
@@ -19,69 +20,30 @@ const obtenerInformacionPokemon = async (response, query) => {
       const pokemonId = informaciónPokemonById(pokemonInfo);
       return pokemonId;
     } else {
+      const pokemonId = await Pokemon.findOne({ where: { nombre: query } });
+      return pokemonId;
     }
   }
+
   //* pokemones completos
   try {
-    const { data } = await axios(`https://pokeapi.co/api/v2/pokemon/`);
-    const pok = data.results;
-    const urlsId = pok.map((pok) => pok.url);
-
+    const urlsId = response.map((pok) => pok.url);
     const promises = urlsId.map((url) => axios.get(url));
+
     const responses = await Promise.all(promises);
-
-    const pokPromise = responses.map((response) => response.data);
-
+    const pokPromise = responses.map((pokemon) => pokemon.data);
     const pokemonId = informaciónPokemonById(pokPromise);
-
     return pokemonId;
   } catch (error) {
     console.error("Error al obtener información del Pokémon:", error.message);
     throw error;
   }
-
-  //   const pokemonId = [];
-
-  //   let pokPromise = [];
-  //   const { data } = await axios(`https://pokeapi.co/api/v2/pokemon/`);
-  //   pok = data.results;
-  //   const urlsId = pok.map((pok) => pok.url);
-  //   console.log("urls =", urlsId);
-  //   const promises = urlsId.map((url) => axios.get(url));
-  //   Promise.all(promises)
-  //     .then((responses) => {
-  //       responses.forEach((response) => {
-  //         pokPromise.push(response.data);
-  //       });
-  //     })
-  //     .then((response) => {
-  //       pokemonId = informaciónPokemonById(pokPromise);
-  //     })
-  //     //   .then((response) => console.log("pokemons", pokemonId))
-  //     .then((response) => {
-  //       return pokemonId;
-  //     });
-  //     // return pokemonId;
-  //   console.log(pokemonId);
-
-  //   for (const pokemon of response) {
-  //     try {
-  //       const response = await axios.get(pokemon.url);
-  //       pokemonInfo.push(response.data);
-  //     } catch (error) {
-  //       console.error(
-  //         `No se pudo obtener información de ${pokemon.name}: ${error.message}`
-  //       );
-  //     }
-  //   }
-
-  //   return pokemonId
 };
 
 //*************************************************************** */
 
-const informaciónPokemonById = (response) => {
-  const pokemonId = response.map((pok) => {
+const informaciónPokemonById = async (pokemons) => {
+  const pokemonId = pokemons.map((pok) => {
     const hp =
       pok.stats.find((stat) => stat.stat.name === "hp")?.base_stat ||
       `Este pokemon no tiene ${base_stat}`;
@@ -115,4 +77,37 @@ const informaciónPokemonById = (response) => {
   return pokemonId;
 };
 
-module.exports = { obtenerInformacionPokemon, informaciónPokemonById };
+//*************************************************************** */
+
+const postearPokemons = async ({
+  nombre,
+  imagen,
+  vida,
+  ataque,
+  defensa,
+  velocidad,
+  altura,
+  peso,
+  types,
+}) => {
+  const pokemon = {
+    nombre,
+    imagen,
+    vida,
+    ataque,
+    defensa,
+    velocidad,
+    altura,
+    peso,
+    types,
+  };
+  const newPokemon = await Pokemon.create(pokemon);
+  newPokemon.addType(types);
+  return newPokemon;
+};
+
+module.exports = {
+  obtenerInformacionPokemon,
+  informaciónPokemonById,
+  postearPokemons,
+};

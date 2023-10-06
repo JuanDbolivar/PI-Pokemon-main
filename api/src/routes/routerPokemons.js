@@ -4,11 +4,11 @@ const getPokemonsById = require("../controllers/getPokemonsById");
 const postPokemons = require("../controllers/postPokemons");
 const getPokemonsByName = require("../controllers/getPokemonsByName");
 
-const routerPoquemons = Router();
+const routerPokemons = Router();
 
-routerPoquemons.get("/", getPokemons);
-routerPoquemons.get("/:id", getPokemonsById);
-routerPoquemons.post("/pok", getPokemonsByName);
-routerPoquemons.post("/", postPokemons);
+routerPokemons.get("/", getPokemons);
+routerPokemons.get("/:id", getPokemonsById);
+// routerPokemons.post("/pok", getPokemonsByName);
+routerPokemons.post("/", postPokemons);
 
-module.exports = routerPoquemons;
+module.exports = routerPokemons;

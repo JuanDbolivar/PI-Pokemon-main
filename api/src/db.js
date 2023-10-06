@@ -3,11 +3,16 @@ const { Sequelize } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
 const { DB_USER, DB_HOST, DB_NAME } = process.env;
+const PokemonFuntion = require("./models/Pokemon");
+const Typesfuntion = require("./models/Type");
 
 const sequelize = new Sequelize(`postgres://${DB_USER}@${DB_HOST}/${DB_NAME}`, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
+
+PokemonFuntion(sequelize);
+Typesfuntion(sequelize);
 const basename = path.basename(__filename);
 
 const modelDefiners = [];
@@ -21,7 +26,6 @@ fs.readdirSync(path.join(__dirname, "/models"))
   .forEach((file) => {
     modelDefiners.push(require(path.join(__dirname, "/models", file)));
   });
-
 // Injectamos la conexion (sequelize) a todos los modelos
 modelDefiners.forEach((model) => model(sequelize));
 // Capitalizamos los nombres de los modelos ie: product => Product
