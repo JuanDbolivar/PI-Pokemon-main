@@ -4,14 +4,10 @@ const { Pokemon, Type } = require("../db");
 const obtenerInformacionPokemon = async (response, query) => {
   //* pokemon por query
   if (query) {
-    query = query.toLowerCase().trim();
-    response = response.filter((res) => res.name === query);
-    if (response.length !== 0) {
+    if (response) {
       const pokemonInfo = [];
-      const pokemon = response.map((pok) => pok.url);
       try {
-        const queryResponse = await axios.get(pokemon);
-        pokemonInfo.push(queryResponse.data);
+        pokemonInfo.push(response);
       } catch (error) {
         console.error(
           `No se pudo obtener información de ${pokemon.name}: ${error.message}`

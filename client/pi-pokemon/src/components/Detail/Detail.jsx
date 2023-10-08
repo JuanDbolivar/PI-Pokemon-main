@@ -24,9 +24,6 @@ function Detail() {
     pokById();
   }, [id]);
 
-  let tipos = pokemonById.types;
-  tipos = tipos.join(", ");
-
   return loading ? (
     <h1>Loading...</h1>
   ) : (
@@ -40,7 +37,7 @@ function Detail() {
       <h2>Velocidad: {pokemonById.velocidad}</h2>
       <h2>Altura: {pokemonById.altura}</h2>
       <h2>Peso: {pokemonById.peso}</h2>
-      <h2>Tipos: {tipos}</h2>
+      <h2>Tipos: {pokemonById.types.join(", ")}</h2>
     </>
   );
 }
