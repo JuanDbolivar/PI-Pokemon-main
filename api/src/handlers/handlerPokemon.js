@@ -26,40 +26,39 @@ const obtenerInformacionPokemon = async (response, query) => {
   }
 
   //* pokemones completos
+  //pokemonList=response
   try {
-    const urlsId = response.map((pok) => pok.url);
-    const promises = urlsId.map((url) => axios.get(url));
+    const promises = response.map((pok) => axios.get(pok.url));
 
     const responses = await Promise.all(promises);
     const pokPromise = responses.map((pokemon) => pokemon.data);
     const pokemonId = informaciónPokemonById(pokPromise);
     return pokemonId;
   } catch (error) {
-    console.error("Error al obtener información del Pokémon:", error.message);
     throw error;
   }
 };
 
 //*************************************************************** */
 
- //* organizando info
-const informaciónPokemonById = async (pokemons) => {
+//* organizando info
+const informaciónPokemonById = (pokemons) => {
   const pokemonId = pokemons.map((pok) => {
     const hp =
       pok.stats.find((stat) => stat.stat.name === "hp")?.base_stat ||
-      `Este pokemon no tiene ${base_stat}`;
+      `Este pokemon no cuenta con vida`;
 
     const def =
       pok.stats.find((stat) => stat.stat.name === "defense")?.base_stat ||
-      `Este pokemon no tiene ${base_stat}`;
+      `Este pokemon no cuenta con defensa`;
 
     const att =
       pok.stats.find((stat) => stat.stat.name === "attack")?.base_stat ||
-      `Este pokemon no tiene ${base_stat}`;
+      `Este pokemon no cuenta con ataque`;
 
     const speed =
       pok.stats.find((stat) => stat.stat.name === "speed")?.base_stat ||
-      `Este pokemon no tiene ${base_stat}`;
+      `Este pokemon no cuenta con velocidad`;
 
     const pokemonId = {
       id: pok.id,

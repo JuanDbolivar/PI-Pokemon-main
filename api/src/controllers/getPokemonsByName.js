@@ -3,35 +3,76 @@ const { URL } = process.env;
 const { Pokemon, conn } = require("../db");
 
 const axios = require("axios");
-const { obtenerInformacionPokemon } = require("../handlers/handlerPokemon");
+// const { obtenerInformacionPokemon } = require("../handlers/handlerPokemon");
 
-const getPokemonsByName =  (req, res) => {
+const getPokemonsByName = async (req, res) => {
+  const apiUrl = "https://pokeapi.co/api/v2/pokemon?limit=1292";
+
+  try {
+    const response = await axios.get(apiUrl);
+    const pokemonList = response.data.results;
+
+    // Array para almacenar la información de los Pokémon
+    const pokemonInfo = [];
+
+    // Función para obtener información adicional de cada Pokémon
+    async function fetchPokemonData(pokemon) {
+      const pokemonResponse = await axios.get(pokemon.url);
+
+      const { id, name } = pokemonResponse.data;
+      const speed = pokemonResponse.data.stats.find(
+        (stat) => stat.stat.name === "speed"
+      ).base_stat;
+      const hp = pokemonResponse.data.stats.find(
+        (stat) => stat.stat.name === "hp"
+      ).base_stat;
+      const defense = pokemonResponse.data.stats.find(
+        (stat) => stat.stat.name === "defense"
+      ).base_stat;
+
+      pokemonInfo.push({
+        id,
+        name,
+        speed,
+        hp,
+        defense,
+      });
+    }
+
+    // Realizar solicitudes en paralelo para obtener información de cada Pokémon
+    await Promise.all(pokemonList.map((pokemon) => fetchPokemonData(pokemon)));
+
+    res.status(200).json(pokemonInfo);
+  } catch (error) {
+    console.error("Error al obtener datos de la API:", error);
+    res.status(500).json({ error: "Error interno del servidor" });
+  }
   // Importa el modelo Pokemon y la instancia de Sequelize (conn)
 
   // Define un nuevo Pokémon y guárdalo en la base de datos
-  const nuevoPokemon = {
-    nombre: "Pikachu",
-    imagen: "ruta_de_la_imagen",
-    vida: 100,
-    ataque: 55,
-    defensa: 40,
-    velocidad: 90,
-    altura: 30,
-    peso: 6,
-  };
+  // const nuevoPokemon = {
+  //   nombre: "Pikachu",
+  //   imagen: "ruta_de_la_imagen",
+  //   vida: 100,
+  //   ataque: 55,
+  //   defensa: 40,
+  //   velocidad: 90,
+  //   altura: 30,
+  //   peso: 6,
+  // };
 
   // Usa el método create de Sequelize para agregar el nuevo Pokémon a la base de datos
-  (async () => {
-    try {
-      const pokemonCreado = await Pokemon.create(nuevoPokemon);
-      res.status(201).json(pokemonCreado);
-    } catch (error) {
-      console.error("Error al crear el Pokémon:", error);
-    } finally {
-      // Cierra la conexión de Sequelize cuando hayas terminado
-      await conn.close();
-    }
-  })();
+  // (async () => {
+  //   try {
+  //     const pokemonCreado = await Pokemon.create(nuevoPokemon);
+  //     res.status(201).json(pokemonCreado);
+  //   } catch (error) {
+  //     console.error("Error al crear el Pokémon:", error);
+  //   } finally {
+  //     // Cierra la conexión de Sequelize cuando hayas terminado
+  //     await conn.close();
+  //   }
+  // })();
 
   // try {
   //   let pokPromise = [];

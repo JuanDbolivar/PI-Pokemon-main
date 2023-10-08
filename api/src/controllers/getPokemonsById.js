@@ -1,5 +1,5 @@
 require("dotenv").config();
-const { URL } = process.env;
+const { URL_ID } = process.env;
 
 const axios = require("axios");
 const { informaciónPokemonById } = require("../handlers/handlerPokemon");
@@ -8,7 +8,7 @@ const { Pokemon, Type } = require("../db");
 const getPokemonsById = async (req, res) => {
   const { id } = req.params;
   try {
-    const { data } = await axios(`${URL}${id}`);
+    const { data } = await axios(`${URL_ID}${id}`);
     const response = [];
     response.push(data);
     const pokemon = await informaciónPokemonById(response);

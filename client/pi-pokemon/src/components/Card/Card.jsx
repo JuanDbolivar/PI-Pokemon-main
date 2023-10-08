@@ -1,16 +1,31 @@
 import "./Card.css";
+import { Link } from "react-router-dom";
 
 function Card({ pok }) {
-  const { id, nombre, vida, ataque, imagen } = pok;
+  const {
+    id,
+    nombre,
+    vida,
+    ataque,
+    defensa,
+    velocidad,
+    altura,
+    peso,
+    types,
+    imagen,
+  } = pok;
+  const tipo = types.join(", ");
+
   return (
     <>
-    <hr />
-      <div>
-        <h2>{nombre}</h2>
-        <h2>{vida}</h2>
-        <h2>{ataque}</h2>
-        <img src={imagen} alt="pokemon image" />
-      </div>
+      <hr />
+      <Link to={`/detail/${id}`}>
+        <div>
+          <img src={imagen} alt="pokemon image" />
+          <h1>{nombre}</h1>
+          <h3>TIPO: {tipo}</h3>
+        </div>
+      </Link>
       <hr />
     </>
   );

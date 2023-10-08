@@ -3,6 +3,7 @@ function SearchBar() {
     <>
       <label htmlFor="">buscar</label>
       <input type="text" />
+      <button>Buscar🔍</button>
     </>
   );
 }
