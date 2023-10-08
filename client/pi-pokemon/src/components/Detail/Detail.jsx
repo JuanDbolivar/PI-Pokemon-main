@@ -1,4 +1,5 @@
 import "./Detail.css";
+import Loading from "../Loading/Loading";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setPokemonsId } from "../../redux/counters/PokemonId/pokemonIdSlice";
@@ -25,7 +26,7 @@ function Detail() {
   }, [id]);
 
   return loading ? (
-    <h1>Loading...</h1>
+    <Loading />
   ) : (
     <>
       <h3>{pokemonById.id}</h3>

@@ -1,13 +1,22 @@
 import "./PokByName.css";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux"; //* con este useSelector yo leo el estado global y extrago lo que requiero
-import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import Loading from "../Loading/Loading";
 
 function PokByName() {
   const { pokemonByName } = useSelector((state) => state.pokemoName);
-  const { name } = useParams();
+  const [loading, setLoading] = useState(true);
 
-  return (
+  useEffect(() => {
+    if (pokemonByName) {
+      setLoading(false);
+    }
+  }, [pokemonByName]);
+
+  return loading ? (
+    <Loading />
+  ) : (
     <>
       <Link to={`/detail/${pokemonByName.id}`}>
         <div>
