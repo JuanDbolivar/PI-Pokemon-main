@@ -1,6 +1,15 @@
 const axios = require("axios");
 const { Pokemon, Type } = require("../db");
 
+const pokemonDb = async (query) => {
+  if (query) {
+    const pokemonId = await Pokemon.findOne({ where: { nombre: query } });
+    return pokemonId;
+  } else {
+    throw new Error("Este pokemon no existe o no ha sido creado");
+  }
+};
+
 const obtenerInformacionPokemon = async (response, query) => {
   //* pokemon por query
   if (query) {
@@ -10,15 +19,16 @@ const obtenerInformacionPokemon = async (response, query) => {
         pokemonInfo.push(response);
       } catch (error) {
         console.error(
-          `No se pudo obtener información de ${pokemon.name}: ${error.message}`
+          `No se pudo obtener información de ${response.name}: ${error.message}`
         );
       }
       const pokemonId = informaciónPokemonById(pokemonInfo);
       return pokemonId;
-    } else {
-      const pokemonId = await Pokemon.findOne({ where: { nombre: query } });
-      return pokemonId;
     }
+    // else {
+    //   const pokemonId = await Pokemon.findOne({ where: { nombre: query } });
+    //   return pokemonId;
+    // }
   }
 
   //* pokemones completos
@@ -87,24 +97,47 @@ const postearPokemons = async ({
   peso,
   types,
 }) => {
-  const pokemon = {
-    nombre,
-    imagen,
-    vida,
-    ataque,
-    defensa,
-    velocidad,
-    altura,
-    peso,
-    types,
-  };
-  const newPokemon = await Pokemon.create(pokemon);
-  newPokemon.addType(types);
-  return newPokemon;
+  try {
+    const pokemon = {
+      nombre,
+      imagen,
+      vida,
+      ataque,
+      defensa,
+      velocidad,
+      altura,
+      peso,
+      types,
+    };
+    const newPokemon = await Pokemon.create(pokemon);
+    const tiposAsociados = await Type.findAll({
+      where: { nombre: types[0] },
+    });
+    console.log(types);
+    await newPokemon.addType(tiposAsociados);
+    return newPokemon;
+  } catch (error) {
+    throw new Error("pokemon existente");
+  }
+  // const pokemon = {
+  //   nombre,
+  //   imagen,
+  //   vida,
+  //   ataque,
+  //   defensa,
+  //   velocidad,
+  //   altura,
+  //   peso,
+  //   types,
+  // };
+  // const newPokemon = await Pokemon.create(pokemon);
+  // newPokemon.addType(types);
+  // return newPokemon;
 };
 
 module.exports = {
   obtenerInformacionPokemon,
   informaciónPokemonById,
   postearPokemons,
+  pokemonDb,
 };

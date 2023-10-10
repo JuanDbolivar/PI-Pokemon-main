@@ -1,7 +1,6 @@
 const { postearPokemons } = require("../handlers/handlerPokemon");
 
 const postPokemons = async (req, res) => {
-  //   res.send("ruta post");
   try {
     const {
       nombre,
@@ -16,7 +15,7 @@ const postPokemons = async (req, res) => {
     } = req.body;
 
     const pokemon = await postearPokemons({
-      nombre,
+      nombre: nombre.toLowerCase().trim(),
       imagen,
       vida,
       ataque,
@@ -26,7 +25,7 @@ const postPokemons = async (req, res) => {
       peso,
       types,
     });
-    res.status(201).json(pokemon);
+    res.status(201).json(`Pokemon ${pokemon.nombre} creado exitosamente`);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

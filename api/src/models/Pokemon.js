@@ -19,6 +19,7 @@ module.exports = (sequelize) => {
       },
       imagen: {
         type: DataTypes.STRING,
+        allowNull: false,
       },
       vida: {
         type: DataTypes.INTEGER,
@@ -38,6 +39,10 @@ module.exports = (sequelize) => {
       },
       peso: {
         type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      types: {
+        type: DataTypes.ARRAY(DataTypes.STRING), 
         allowNull: false,
       },
     },

@@ -7,7 +7,6 @@ module.exports = (sequelize) => {
       // es un array llamado types
       id: {
         type: INTEGER,
-        // defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
       },
       nombre: {

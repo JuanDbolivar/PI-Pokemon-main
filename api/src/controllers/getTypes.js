@@ -10,7 +10,6 @@ const getTypes = async (req, res) => {
     const { data } = await axios(URL_TYPES);
     const response = data.results;
     const types = await obtenerTypes(response);
-    console.log(types);
     const typeBd = await Type.bulkCreate(types);
 
     res.status(200).json({ message: "Info guardada con exito" });

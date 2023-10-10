@@ -38,13 +38,15 @@ function SearchBar() {
         onChange={handleChange}
         value={name}
       />
-      <button
-        onClick={() => {
-          onSearch(name);
-        }}
-      >
-        Buscar🔍
-      </button>
+      {name ? (
+        <button
+          onClick={() => {
+            onSearch(name);
+          }}
+        >
+          Buscar🔍
+        </button>
+      ) : null}
     </>
   );
 }
