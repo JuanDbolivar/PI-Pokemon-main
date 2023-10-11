@@ -1,10 +1,26 @@
 import "./Form";
-// import Loading from "../Loading/Loading";
-// import { useState } from "react";
+import axios from "axios";
 import { useSelector } from "react-redux";
 import { HandlerForm } from "../../handlers/HandlerForm";
+import { useEffect, useState } from "react";
 
 function Form() {
+  const [response, setResponse] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios("http://localhost:3001/types/db");
+        if (data) {
+          setResponse(data);
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    fetchData();
+  }, []);
+
   const {
     nombre,
     imagen,
@@ -73,7 +89,7 @@ function Form() {
         <input
           type="number"
           name="defensa"
-          // required
+          required
           value={defensa}
           onChange={handleDChange}
         />
@@ -82,7 +98,6 @@ function Form() {
         <input
           type="number"
           name="velocidad"
-          // required
           value={velocidad}
           onChange={handleVelChange}
         />
@@ -91,7 +106,6 @@ function Form() {
         <input
           type="number"
           name="altura"
-          // required
           value={altura}
           onChange={handleAlChange}
         />
@@ -100,19 +114,29 @@ function Form() {
         <input
           type="number"
           name="peso"
-          // required
           value={peso}
           onChange={handlePChange}
         />
 
-        <label htmlFor="types">Tipos</label>
-        <input
-          type="text"
-          name="types"
-          // required
-          value={types}
-          onChange={handleTChange}
-        />
+        <label htmlFor="types">
+          Tipos: 
+          {response.length !== 0 && (
+          <select
+              multiple={true}
+              id="types"
+              name="types"
+              value={types}
+              onChange={handleTChange}
+              size={2}
+            >
+              {response.map((t) => (
+                <option key={t.id} value={t.nombre}>
+                  {t.nombre}
+                </option>
+              ))}
+            </select>
+          )}
+        </label>
 
         <button>Agregar pokemon</button>
       </form>

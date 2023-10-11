@@ -12,7 +12,7 @@ function Home() {
   const { pokemons } = useSelector((state) => state.pokemon);
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  useEffect(() => { // sirve para llamar a los pokemones otra vez, cada que se recargue la pagina
     if (!pokemons.lenght) {
       const LandingToHome = async () => {
         try {

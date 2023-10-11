@@ -2,7 +2,7 @@ require("dotenv").config();
 const { URL_TYPES } = process.env;
 
 const axios = require("axios");
-const obtenerTypes = require("../handlers/handlerTypes");
+const { obtenerTypes } = require("../handlers/handlerTypes");
 const { Type } = require("../db");
 
 const getTypes = async (req, res) => {
@@ -18,4 +18,13 @@ const getTypes = async (req, res) => {
   }
 };
 
-module.exports = getTypes;
+const getTypesDb = async (req,res) => {
+  try {
+    const response = await Type.findAll();
+    res.send(response);
+  } catch (error) {
+    res.send(error.message);
+  }
+};
+
+module.exports = { getTypes, getTypesDb };

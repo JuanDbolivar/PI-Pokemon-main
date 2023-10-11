@@ -119,20 +119,6 @@ const postearPokemons = async ({
   } catch (error) {
     throw new Error("pokemon existente");
   }
-  // const pokemon = {
-  //   nombre,
-  //   imagen,
-  //   vida,
-  //   ataque,
-  //   defensa,
-  //   velocidad,
-  //   altura,
-  //   peso,
-  //   types,
-  // };
-  // const newPokemon = await Pokemon.create(pokemon);
-  // newPokemon.addType(types);
-  // return newPokemon;
 };
 
 module.exports = {

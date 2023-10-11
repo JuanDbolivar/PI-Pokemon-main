@@ -16,4 +16,4 @@ const obtenerTypes = async (response) => {
   }
 };
 
-module.exports = obtenerTypes;
+module.exports = { obtenerTypes };

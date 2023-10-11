@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
- 
   nombre: "",
   imagen: "",
   vida: 0,
@@ -11,7 +10,6 @@ const initialState = {
   altura: 0,
   peso: 0,
   types: [],
- 
 };
 
 export const newPokemonSlice = createSlice({
@@ -43,7 +41,7 @@ export const newPokemonSlice = createSlice({
       state.peso = action.payload.peso;
     },
     setPokTypes: (state, action) => {
-      state.types = [action.payload.types];
+      state.types = [...state.types, action.payload.types];
     },
     unSetPok: (state) => {
       state.nombre = "";
@@ -59,7 +57,6 @@ export const newPokemonSlice = createSlice({
   },
 });
 
-// Action creators are generated for each case reducer function
 export const {
   setNewPokwmon,
   setPokImagen,

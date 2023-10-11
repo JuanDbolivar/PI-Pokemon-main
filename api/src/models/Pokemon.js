@@ -23,23 +23,24 @@ module.exports = (sequelize) => {
       },
       vida: {
         type: DataTypes.INTEGER,
+        allowNull: false,
       },
       ataque: {
         type: DataTypes.INTEGER,
+        allowNull: false,
       },
       defensa: {
         type: DataTypes.INTEGER,
+        allowNull: false,
       },
       velocidad: {
         type: DataTypes.INTEGER,
       },
       altura: {
         type: DataTypes.INTEGER,
-        allowNull: false,
       },
       peso: {
         type: DataTypes.INTEGER,
-        allowNull: false,
       },
       types: {
         type: DataTypes.ARRAY(DataTypes.STRING), 
