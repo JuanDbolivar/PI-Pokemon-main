@@ -32,7 +32,7 @@ const getPokemons = async (req, res) => {
         }
       }
     } else {
-      const { data } = await axios(URL_ID);
+      const { data } = await axios(URL);
       const next = data.next;
       const response = data.results;
       const pokemon = await obtenerInformacionPokemon(response);

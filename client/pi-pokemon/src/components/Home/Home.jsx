@@ -5,7 +5,7 @@ import axios from "axios";
 import { HandlersHome } from "../../handlers/Home/HandlersHome";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setPokemon } from "../../redux/counters/Pokemon/pokemonSlice";
+// import { setPokemon } from "../../redux/counters/Pokemon/pokemonSlice";
 import { setApiPokemon } from "../../redux/counters/Pokemon/pokemonSlice";
 import ApiPokemon from "../ApiPokemon/ApiPokemon";
 import PokemonFiltered from "../PokemonFiltered/PokemonFiltered";
@@ -42,23 +42,23 @@ function Home() {
     setDb(false);
   };
 
-  useEffect(() => {
-    // sirve para llamar a los pokemones otra vez, cada que se recargue la pagina
-    if (pokemons.length === 0) {
-      const LandingToHome = async () => {
-        try {
-          const { data } = await axios("http://localhost:3001/poquemons/");
-          if (data) {
-            dispatch(setPokemon(data));
-            console.log("data", data);
-          }
-        } catch (error) {
-          console.log(error.message);
-        }
-      };
-      LandingToHome();
-    }
-  }, []);
+  // useEffect(() => {
+  //   // sirve para llamar a los pokemones otra vez, cada que se recargue la pagina
+  //   if (pokemons.length === 0) {
+  //     const LandingToHome = async () => {
+  //       try {
+  //         const { data } = await axios("http://localhost:3001/poquemons/");
+  //         if (data) {
+  //           dispatch(setPokemon(data));
+  //           console.log("data", data);
+  //         }
+  //       } catch (error) {
+  //         console.log(error.message);
+  //       }
+  //     };
+  //     LandingToHome();
+  //   }
+  // }, []);
 
   useEffect(() => {
     //llama los pokemones de la base de datos

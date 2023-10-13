@@ -15,6 +15,10 @@ function Nav() {
       <Link to={"/form"}>
         <span>Crear pokemon</span>
       </Link>
+      <br />
+      <Link to={"/"}>
+        <span> SALIR</span>
+      </Link>
       <hr />
     </>
   );

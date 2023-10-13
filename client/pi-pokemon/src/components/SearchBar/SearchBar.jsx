@@ -20,11 +20,11 @@ function SearchBar() {
         `http://localhost:3001/poquemons/?name=${name}`
       );
       if (data[0] !== null) {
-        console.log("data", data);
         dispatch(setPokemonName(data[0]));
         navigate(`/PokByName/${name}`);
+      } else {
+        window.alert("personaje no existe");
       }
-      window.alert("personaje no existe");
     } catch (error) {
       console.log(error.message);
     }
