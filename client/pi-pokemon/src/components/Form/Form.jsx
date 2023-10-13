@@ -1,24 +1,28 @@
 import "./Form";
-import axios from "axios";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { unSetPok } from "../../redux/counters/pokemonCreate/pokemonCreateSlice";
 import { HandlerForm } from "../../handlers/HandlerForm";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 function Form() {
-  const [response, setResponse] = useState([]);
+  const dispatch = useDispatch();
+  const {
+    handleChange,
+    handleIChange,
+    handleVChange,
+    handleAChange,
+    handleDChange,
+    handleVelChange,
+    handleAlChange,
+    handlePChange,
+    handleTChange,
+    handleSubmit,
+  } = HandlerForm();
+
+  const { tipos } = useSelector((state) => state.types);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios("http://localhost:3001/types/db");
-        if (data) {
-          setResponse(data);
-        }
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
-    fetchData();
+    dispatch(unSetPok());
   }, []);
 
   const {
@@ -32,19 +36,6 @@ function Form() {
     peso,
     types,
   } = useSelector((state) => state.newPokemon);
-
-  const {
-    handleChange,
-    handleIChange,
-    handleVChange,
-    handleAChange,
-    handleDChange,
-    handleVelChange,
-    handleAlChange,
-    handlePChange,
-    handleTChange,
-    handleSubmit,
-  } = HandlerForm();
 
   return (
     <>
@@ -119,21 +110,22 @@ function Form() {
         />
 
         <label htmlFor="types">
-          Tipos: 
-          {response.length !== 0 && (
-          <select
+          Tipos:
+          {tipos.length !== 0 && (
+            <select
               multiple={true}
               id="types"
               name="types"
-              value={types}
+              // value={types}
               onChange={handleTChange}
-              size={2}
             >
-              {response.map((t) => (
-                <option key={t.id} value={t.nombre}>
-                  {t.nombre}
-                </option>
-              ))}
+              <optgroup label="tipos">
+                {tipos.map((t) => (
+                  <option key={t.id} value={t.nombre}>
+                    {t.nombre}
+                  </option>
+                ))}
+              </optgroup>
             </select>
           )}
         </label>

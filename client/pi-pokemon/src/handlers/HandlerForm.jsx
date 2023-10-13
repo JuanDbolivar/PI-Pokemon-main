@@ -15,6 +15,7 @@ import {
 
 export const HandlerForm = () => {
   const dispatch = useDispatch();
+
   const {
     nombre,
     imagen,
@@ -70,6 +71,9 @@ export const HandlerForm = () => {
   const handleTChange = (e) => {
     const property = e.target.name;
     const value = e.target.value;
+    if (types.includes(value)) {
+      return;
+    }
     dispatch(setPokTypes({ [property]: value }));
   };
 

@@ -5,12 +5,6 @@ function Card({ pok }) {
   const {
     id,
     nombre,
-    vida,
-    ataque,
-    defensa,
-    velocidad,
-    altura,
-    peso,
     types,
     imagen,
   } = pok;

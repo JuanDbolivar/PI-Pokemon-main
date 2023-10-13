@@ -1,13 +1,13 @@
-import { useEffect } from "react";
 import "./Landing.css";
-// import { useDispatch } from "react-redux";
-// import { setPokemon } from "../../redux/counters/Pokemon/pokemonSlice";
 import axios from "axios";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-// import { useEffect } from "react";
+import { setPokemon } from "../../redux/counters/Pokemon/pokemonSlice";
+import { setTypes } from "../../redux/counters/Type/typeSlice";
 
 function Landing() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,26 +15,35 @@ function Landing() {
       try {
         await axios("http://localhost:3001/types");
       } catch (error) {
-        console.log("error", error.message);
+        console.error("error", error.message);
       }
     };
     callTypes();
   }, []);
-  // useEffect(() => {
-  //   const LandingToHome = async () => {
-  //     try {
-  //       const { data } = await axios("http://localhost:3001/poquemons/");
-  //       if (data) {
-  //         dispatch(setPokemon(data));
-  //       }
-  //     } catch (error) {
-  //       console.log(error.message);
-  //     }
-  //   };
-  //   LandingToHome();
-  // }, []);
 
-  const buttonHandler = () => {
+  useEffect(() => {
+    const LandingToHome = async () => {
+      try {
+        const { data } = await axios("http://localhost:3001/poquemons/");
+        if (data) {
+          dispatch(setPokemon(data));
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    LandingToHome();
+  }, []);
+
+  const buttonHandler = async () => {
+    try {
+      const { data } = await axios("http://localhost:3001/types/db");
+      if (data) {
+        dispatch(setTypes(data));
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
     navigate("/home");
   };
 
