@@ -3,14 +3,17 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setPokemon } from "../../redux/counters/Pokemon/pokemonSlice";
+import {
+  setPokemon,
+  setPokemonCopia,
+} from "../../redux/counters/Pokemon/pokemonSlice";
 import { setTypes } from "../../redux/counters/Type/typeSlice";
 
 function Landing() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { pokemons}=useSelector((state) => state.pokemon)
-  
+  const { pokemons } = useSelector((state) => state.pokemon);
+
   const buttonHandler = async () => {
     try {
       const { data } = await axios("http://localhost:3001/types/db");
@@ -41,6 +44,7 @@ function Landing() {
           const { data } = await axios("http://localhost:3001/poquemons/");
           if (data) {
             dispatch(setPokemon(data));
+            dispatch(setPokemonCopia(data));
           }
         } catch (error) {
           console.log(error.message);
@@ -49,8 +53,6 @@ function Landing() {
       LandingToHome();
     }
   }, []);
-
-
 
   return (
     <>
