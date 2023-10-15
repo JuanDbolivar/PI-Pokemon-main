@@ -4,30 +4,28 @@ import {
   setApiPokemon,
 } from "../../redux/counters/Pokemon/pokemonSlice";
 
-export const SortPokemons = () => {
+export const HandlerSortAttack = () => {
   const dispatch = useDispatch();
-  const { pokemons, pokemonsCopia, apiPokemon, apiPokemonCopia } = useSelector(
-    (state) => state.pokemon
-  );
+  const { pokemons, apiPokemon } = useSelector((state) => state.pokemon);
 
   const sortPokemonByName = (order) => {
     return (a, b) => {
-      const nameA = a.nombre.toUpperCase();
-      const nameB = b.nombre.toUpperCase();
-      return order * nameA.localeCompare(nameB);
+      const ataqueA = a.ataque;
+      const ataqueB = b.ataque;
+      return order * (ataqueB - ataqueA);
     };
   };
 
-  const handlerSort = () => {
+  const handlerSortAttack = () => {
     const sortedPokemon = [...pokemons].sort(sortPokemonByName(1));
     dispatch(setPokemon(sortedPokemon));
   };
-  const handlerSortZa = () => {
+  const handlerSortMinAttack = () => {
     const pokemon = [...pokemons].sort(sortPokemonByName(-1));
     dispatch(setPokemon(pokemon));
   };
 
-  const handlerSortTotal = () => {
+  const handlerSortTotalAttack = () => {
     let totalPokemon = [...pokemons, ...apiPokemon];
 
     const apiIds = apiPokemon.map((pok) => pok.id);
@@ -46,7 +44,7 @@ export const SortPokemons = () => {
     }
   };
 
-  const handlerSortTotalZa = () => {
+  const handlerSortTotalMinAttack = () => {
     let totalPokemon = [...pokemons, ...apiPokemon];
 
     const apiIds = apiPokemon.map((pok) => pok.id);
@@ -64,30 +62,22 @@ export const SortPokemons = () => {
       dispatch(setPokemon(totalPokemon));
     }
   };
-  const handlerOriginal = () => {
-    dispatch(setPokemon(pokemonsCopia));
-  };
 
-  const handlerSortDb = () => {
+  const handlerSortDbAttack = () => {
     const dbPokemon = [...apiPokemon].sort(sortPokemonByName(1));
     dispatch(setApiPokemon(dbPokemon));
   };
-  const handlerSortZaDb = () => {
+  const handlerSortDbMinAttack = () => {
     const dbPokemon = [...apiPokemon].sort(sortPokemonByName(-1));
     dispatch(setApiPokemon(dbPokemon));
   };
-  const handlerOriginalDb = () => {
-    dispatch(setApiPokemon(apiPokemonCopia));
-  };
 
   return {
-    handlerSort,
-    handlerOriginal,
-    handlerSortZa,
-    handlerSortTotal,
-    handlerSortTotalZa,
-    handlerSortDb,
-    handlerSortZaDb,
-    handlerOriginalDb,
+    handlerSortAttack,
+    handlerSortMinAttack,
+    handlerSortTotalAttack,
+    handlerSortTotalMinAttack,
+    handlerSortDbAttack,
+    handlerSortDbMinAttack,
   };
 };

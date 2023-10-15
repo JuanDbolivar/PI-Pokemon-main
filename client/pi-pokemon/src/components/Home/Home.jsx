@@ -5,6 +5,7 @@ import ApiPokemon from "../ApiPokemon/ApiPokemon";
 import PokemonFiltered from "../PokemonFiltered/PokemonFiltered";
 import axios from "axios";
 import { SortPokemons } from "../../handlers/SortName/SortPokemons";
+import { HandlerSortAttack } from "../../handlers/SortAttack/HandlerSortAttack";
 import { HandlersHome } from "../../handlers/Home/HandlersHome";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -27,6 +28,14 @@ function Home() {
     handlerSortZaDb,
     handlerOriginalDb,
   } = SortPokemons();
+  const {
+    handlerSortAttack,
+    handlerSortMinAttack,
+    handlerSortTotalAttack,
+    handlerSortTotalMinAttack,
+    handlerSortDbAttack,
+    handlerSortDbMinAttack,
+  } = HandlerSortAttack();
 
   const [isOk, setIsOk] = useState(false);
   const [db, setDb] = useState(false);
@@ -141,6 +150,23 @@ function Home() {
                   >
                     Orden Z-A
                   </button>
+                  <button
+                    onClick={() => {
+                      handlerSortTotalAttack();
+                      handlerSortState();
+                    }}
+                  >
+                    Orden ataque mayor
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      handlerSortTotalMinAttack();
+                      handlerSortState();
+                    }}
+                  >
+                    Orden menor ataque
+                  </button>
 
                   {!sort && <ApiPokemon />}
                   <Cards />
@@ -172,6 +198,21 @@ function Home() {
                   >
                     Orden API Z-A
                   </button>
+                  <button
+                    onClick={() => {
+                      handlerSortAttack();
+                    }}
+                  >
+                    Orden API Mayor attack
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      handlerSortMinAttack();
+                    }}
+                  >
+                    Orden API Menor Attack
+                  </button>
                   <Cards />
                 </>
               )}
@@ -199,6 +240,21 @@ function Home() {
                     }}
                   >
                     OrdenDB Z-A
+                  </button>
+                  <button
+                    onClick={() => {
+                      handlerSortDbAttack();
+                    }}
+                  >
+                    OrdenDB Mayor attack
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      handlerSortDbMinAttack();
+                    }}
+                  >
+                    OrdenDB Min attack
                   </button>
                   <ApiPokemon />
                 </>
