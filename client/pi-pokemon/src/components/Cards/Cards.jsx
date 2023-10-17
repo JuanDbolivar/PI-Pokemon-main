@@ -8,7 +8,7 @@ function Cards() {
 
   return (
     <>
-      <div>
+      <div className="cards">
         {pokemons.map((pok) => (
           <Card key={pok.id} pok={pok} />
         ))}

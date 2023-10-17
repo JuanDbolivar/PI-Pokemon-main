@@ -1,6 +1,7 @@
 import "./Home.css";
 import Cards from "../Cards/Cards";
 import Loading from "../Loading/Loading";
+// import Pagination from "../Pagination/Pagination";
 import ApiPokemon from "../ApiPokemon/ApiPokemon";
 import PokemonFiltered from "../PokemonFiltered/PokemonFiltered";
 import axios from "axios";
@@ -97,7 +98,7 @@ function Home() {
   }, []);
 
   return (
-    <>
+    <div className="home">
       {isOk ? (
         <>
           <button onClick={handlerBorrar}>Borrar filtro</button>
@@ -167,7 +168,6 @@ function Home() {
                   >
                     Orden menor ataque
                   </button>
-
                   {!sort && <ApiPokemon />}
                   <Cards />
                 </>
@@ -182,7 +182,6 @@ function Home() {
                   >
                     Original API
                   </button>
-
                   <button
                     onClick={() => {
                       handlerSort();
@@ -190,7 +189,6 @@ function Home() {
                   >
                     Orden API A-Z
                   </button>
-
                   <button
                     onClick={() => {
                       handlerSortZa();
@@ -205,7 +203,6 @@ function Home() {
                   >
                     Orden API Mayor attack
                   </button>
-
                   <button
                     onClick={() => {
                       handlerSortMinAttack();
@@ -265,7 +262,7 @@ function Home() {
       ) : (
         <Loading />
       )}
-    </>
+    </div>
   );
 }
 
