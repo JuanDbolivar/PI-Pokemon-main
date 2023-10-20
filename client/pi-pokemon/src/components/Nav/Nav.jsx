@@ -4,7 +4,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import { Link } from "react-router-dom";
 
 function Nav() {
-  const [home, setHome] = useState(false);
+  const [home, setHome] = useState(true);
   const [form, setForm] = useState(false);
 
   return (

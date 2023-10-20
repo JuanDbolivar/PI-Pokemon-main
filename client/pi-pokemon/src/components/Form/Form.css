@@ -1,0 +1,60 @@
+.imgForm {
+  position: absolute;
+  bottom: 73%;
+  width: 100vw;
+  z-index: -1;
+  height: 176px;
+}
+.imgBack {
+  position: absolute;
+  width: 100vw;
+  height: 145vh;
+  z-index: -1;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 30%;
+  width: 30%;
+  font-size: 1.3rem;
+  right: 35%;
+}
+
+form input {
+  border-radius: 20px;
+  height: 20px;
+}
+
+form input[type=number]::-webkit-inner-spin-button,form input[type=number]::-webkit-outer-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+form button {
+  margin-bottom: 10px;
+  cursor: pointer;
+  margin: 3px 10px;
+  font-size: 1rem;
+  border-radius: 20px;
+  padding: 3px 10px;
+}
+
+form select {
+  width: 200px;
+  font-size: 1rem;
+  background-color: red;
+  color: wheat;
+  margin: 0 8px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+form select:focus,
+form select[type]:focus {
+  border-color: rgb(255, 0, 0);
+  box-shadow: 0 1px 1px rgba(229, 23, 23, 0.075) inset,
+    0 0 8px rgba(255, 0, 0, 0.6);
+  outline: 0 none;
+}

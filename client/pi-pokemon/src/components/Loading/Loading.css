@@ -1,0 +1,19 @@
+.imgNPF {
+    position: absolute;
+    bottom: 73%;
+    width: 100vw;
+    z-index: -1;
+    height: 176px;
+  }
+  
+.backgroundLoading{
+    position: absolute;
+    width: 100vw;
+    height: 92vh;
+    z-index: -1;
+}
+  .loading{
+    position: relative;
+    margin: 20% 32%;
+    width: 400px;
+  }

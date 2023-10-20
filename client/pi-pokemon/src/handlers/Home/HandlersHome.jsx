@@ -6,11 +6,11 @@ import { useState } from "react";
 
 export function HandlersHome() {
   const dispatch = useDispatch();
-  const {  apiPokemon, pokemonsCopia } = useSelector(
+  const {  pokemonsCopia } = useSelector(
     (state) => state.pokemon
   );
   const [typesFilter, setTypesFilter] = useState("");
-  const pok = [...pokemonsCopia, ...apiPokemon];
+  const pok = [...pokemonsCopia];
 
   const handlerFilter = (e) => {
     const value = e.target.value;

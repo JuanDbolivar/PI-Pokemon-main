@@ -1,0 +1,49 @@
+.nameContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.nameCon {
+  position: relative;
+  width: 250px;
+  height: 300px;
+  margin: 30px;
+  margin-top: 15%;
+}
+
+.name img {
+  width: 200px;
+  height: 200px;
+}
+
+.name {
+  padding: 5px;
+  border: 1px black solid;
+  background: repeating-linear-gradient(135deg, red, black, white 150px);
+}
+
+.texto {
+  background-color: rgb(49, 48, 46);
+  width: 230px;
+  height: 100px;
+  padding: 0 10px 0;
+  color: red;
+}
+
+.imgname {
+    position: absolute;
+    width: 100vw;
+    height: 180vh;
+    z-index: -1;
+  }
+  
+  .imgNav {
+    position: absolute;
+    bottom: 73%;
+    width: 100vw;
+    z-index: -1;
+    height: 176px;
+  }
+  
