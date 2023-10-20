@@ -1,0 +1,36 @@
+a:link,
+a:visited,
+a:active {
+  text-decoration: none;
+}
+
+.Nav {
+  position: relative;
+  height: 50px;
+}
+
+.lActive {
+  color: white;
+}
+
+.linkH {
+  position: absolute;
+  top: 12px;
+  font-size: 1.3rem;
+  left: 5%;
+  color: black;
+}
+.linkF {
+  position: absolute;
+  top: 12px;
+  font-size: 1.3rem;
+  left: 25%;
+  color: black;
+}
+.linkS {
+  position: absolute;
+  top: 12px;
+  font-size: 1.3rem;
+  left: 52%;
+  color: black;
+}

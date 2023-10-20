@@ -32,21 +32,22 @@ function SearchBar() {
 
   return (
     <>
-      <label htmlFor="pokemon">buscar</label>
+      <label htmlFor="pokemon" className="searchLabel">buscar</label>
       <input
         type="text"
         name="pokemon"
         required
         onChange={handleChange}
         value={name}
+        className="searchInput"
       />
       {name ? (
         <button
           onClick={() => {
             onSearch(name);
           }}
-        >
-          Buscar🔍
+        className="searchButton">
+          🔍
         </button>
       ) : null}
     </>

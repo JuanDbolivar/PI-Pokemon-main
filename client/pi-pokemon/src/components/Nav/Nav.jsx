@@ -1,26 +1,43 @@
 import "./Nav.css";
-import React from "react";
+import { useState } from "react";
 import SearchBar from "../SearchBar/SearchBar";
 import { Link } from "react-router-dom";
 
 function Nav() {
+  const [home, setHome] = useState(false);
+  const [form, setForm] = useState(false);
+
   return (
-    <>
-      <hr />
-      <SearchBar /> <br />
-      <Link to={"/home"}>
-        <span>Home</span>
+    <div className="Nav">
+      <SearchBar />
+      <Link
+        to={"/home"}
+        className="linkH"
+        onClick={() => {
+          setHome(true);
+          setForm(false);
+
+        }}
+      >
+        <span className={home ? "lActive" : null}>Home</span>
       </Link>
-      <br />
-      <Link to={"/form"}>
-        <span>Crear pokemon</span>
+
+      <Link
+        to={"/form"}
+        className="linkF"
+        onClick={() => {
+          setForm(true);
+          setHome(false);
+
+        }}
+      >
+        <span className={form ? "lActive" : null}>Crear pokemon</span>
       </Link>
-      <br />
-      <Link to={"/"}>
+
+      <Link to={"/"} className="linkS">
         <span> SALIR</span>
       </Link>
-      <hr />
-    </>
+    </div>
   );
 }
 

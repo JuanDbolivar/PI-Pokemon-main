@@ -1,17 +1,26 @@
-/* .card {
-    border: 5px solid #44045f;
-    margin: 5px;
-    padding-bottom: 20px;
-    align-items: center;
-    background-color: #3a0850;
-    color: beige;
-    border-radius: 8%;
-    width: 20%;
-    height: 350px;
-    position: relative;
-    font-size: 90%;
+.cardCon {
+  position: relative;
+  width: 250px;
+  height: 300px;
+  margin: 30px;
 }
 
-.cardCon{
-    width: 300px;
-} */
+.card img {
+  width: 200px;
+  height: 200px;
+}
+
+.card {
+  padding: 5px;
+  border: 1px black solid;
+  background: repeating-linear-gradient(135deg, red, black, white 100px);
+}
+
+.text {
+  background-color: rgb(49, 48, 46);
+  width: 230px;
+  height: 100px;
+  padding: 0 10px 0;
+  color: red;
+  
+}

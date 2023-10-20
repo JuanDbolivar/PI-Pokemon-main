@@ -1,15 +1,16 @@
 import { useSelector, useDispatch } from "react-redux";
 import {
-  setPokemonsFiltered,
-  unSetPokemonsFiltered,
+  setPokemon,
 } from "../../redux/counters/Pokemon/pokemonSlice";
 import { useState } from "react";
 
 export function HandlersHome() {
   const dispatch = useDispatch();
+  const {  apiPokemon, pokemonsCopia } = useSelector(
+    (state) => state.pokemon
+  );
   const [typesFilter, setTypesFilter] = useState("");
-  const { pokemons, apiPokemon } = useSelector((state) => state.pokemon);
-  const pok = [...pokemons, ...apiPokemon];
+  const pok = [...pokemonsCopia, ...apiPokemon];
 
   const handlerFilter = (e) => {
     const value = e.target.value;
@@ -20,11 +21,11 @@ export function HandlersHome() {
     const filteredPokemons = pok.filter((pokemon) =>
       pokemon.types.includes(typesFilter)
     );
-    dispatch(setPokemonsFiltered(filteredPokemons));
+    dispatch(setPokemon(filteredPokemons));
   };
 
   const handlerBorrar = () => {
-    dispatch(unSetPokemonsFiltered());
+    dispatch(setPokemon(pokemonsCopia));
   };
 
   return { handlerFilter, buttonrFilter, handlerBorrar };

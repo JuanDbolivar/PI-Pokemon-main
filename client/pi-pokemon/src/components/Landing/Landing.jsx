@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import {
   setPokemon,
   setPokemonCopia,
+  setApiPokemon,
+  setApiPokemonCopia,
 } from "../../redux/counters/Pokemon/pokemonSlice";
 import { setTypes } from "../../redux/counters/Type/typeSlice";
 
@@ -38,20 +40,18 @@ function Landing() {
   }, []);
 
   useEffect(() => {
-    if (pokemons.length === 0) {
-      const LandingToHome = async () => {
-        try {
-          const { data } = await axios("http://localhost:3001/poquemons/");
-          if (data) {
-            dispatch(setPokemon(data));
-            dispatch(setPokemonCopia(data));
-          }
-        } catch (error) {
-          console.log(error.message);
+    const LandingToHome = async () => {
+      try {
+        const { data } = await axios("http://localhost:3001/poquemons/");
+        if (data) {
+          dispatch(setPokemon(data));
+          dispatch(setPokemonCopia(data));
         }
-      };
-      LandingToHome();
-    }
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    LandingToHome();
   }, []);
 
   return (

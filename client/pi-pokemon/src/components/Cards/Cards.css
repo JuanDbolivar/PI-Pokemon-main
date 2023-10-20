@@ -1,8 +1,21 @@
-/* .cards {
-    display: flex;
-     flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-} */
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.imgCards {
+  position: absolute;
+  width: 100vw;
+  height: 180vh;
+  z-index: -1;
+}
+
+.imgNPF {
+  position: absolute;
+  bottom: 73%;
+  width: 100vw;
+  z-index: -1;
+  height: 176px;
+}

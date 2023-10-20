@@ -7,17 +7,17 @@ function Card({ pok }) {
 
   return (
     <>
-      <hr />
       <div className="cardCon">
         <Link to={`/detail/${id}`}>
           <div className="card">
             <img src={imagen} alt="pokemon image" />
-            <h1>{nombre}</h1>
-            <h3>TIPO: {tipo}</h3>
+            <div className="text">
+              <h1>{nombre}</h1>
+              <h3>TIPO: {tipo}</h3>
+            </div>
           </div>
         </Link>
       </div>
-      <hr />
     </>
   );
 }

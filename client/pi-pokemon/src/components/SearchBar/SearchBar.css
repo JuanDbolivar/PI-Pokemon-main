@@ -1,0 +1,28 @@
+.searchLabel {
+  position: absolute;
+  top: 6px;
+  left: 79%;
+  font-size: 1.3rem;
+}
+.searchInput {
+  position: absolute;
+  top: 5px;
+  left: 85%;
+  border-radius: 20px;
+  height: 50%;
+}
+input:focus, input[type]:focus {
+    border-color: rgb(255, 0, 0);
+    box-shadow: 0 1px 1px rgba(229, 23, 23, 0.075)inset, 0 0 8px rgba(255, 0, 0, 0.6);
+    outline: 0 none;
+}
+.searchButton {
+  position: absolute;
+  top: 7.47px;
+  border-radius: 20px;
+  left: 94.5%;
+  padding: 3.65px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
