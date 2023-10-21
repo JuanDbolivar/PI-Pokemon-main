@@ -58,3 +58,12 @@ form select[type]:focus {
     0 0 8px rgba(255, 0, 0, 0.6);
   outline: 0 none;
 }
+
+.error{
+  color: red;
+}
+
+.typesInpu{
+  background-color: rgb(121, 21, 21);
+  border-color: black;
+}

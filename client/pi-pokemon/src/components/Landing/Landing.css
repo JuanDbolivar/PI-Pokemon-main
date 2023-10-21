@@ -11,11 +11,22 @@
   width: 100%;
   height: 100%;
   position: absolute;
+}
 
+.ingreso {
+  /* top: 0%;
+  left: 0%; */
+  position: absolute;
+  z-index: 15;
 }
 
 .button {
-  margin: 19% 45%;
+  width: 200px;
+  height: 150px;
+  margin: 15% 40%;
   position: absolute;
   z-index: 10;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
 }

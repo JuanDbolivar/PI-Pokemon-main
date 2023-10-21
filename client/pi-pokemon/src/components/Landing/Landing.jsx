@@ -1,20 +1,20 @@
 import "./Landing.css";
 import axios from "axios";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
   setPokemon,
   setPokemonCopia,
-  setApiPokemon,
-  setApiPokemonCopia,
+  // setApiPokemon,
+  // setApiPokemonCopia,
 } from "../../redux/counters/Pokemon/pokemonSlice";
 import { setTypes } from "../../redux/counters/Type/typeSlice";
 
 function Landing() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { pokemons } = useSelector((state) => state.pokemon);
+  // const { pokemons } = useSelector((state) => state.pokemon);
 
   const buttonHandler = async () => {
     try {
@@ -57,10 +57,14 @@ function Landing() {
   return (
     <>
       <div className="container">
-        <img src="https://i.gifer.com/CxOP.gif" />
+        <img src="https://i.gifer.com/CxOP.gif" alt="background" />
 
         <button onClick={buttonHandler} className="button">
-          Empecemos
+          <img
+            src="https://icon-library.com/images/small-pokeball-icon/small-pokeball-icon-5.jpg"
+            alt="button "
+            className="ingreso"
+          />
         </button>
       </div>
     </>
