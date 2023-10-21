@@ -18,8 +18,8 @@ import {
 function Home() {
   const dispatch = useDispatch();
   const { handlerAll, handlerApi, handlerDb } = ViewsApiDb();
-  const { handlerFilter, buttonrFilter, handlerBorrar } = HandlersHome();
-  const { handlerSort, handlerOriginal, handlerSortZa } = SortPokemons();
+  const { handlerFilter, buttonrFilter } = HandlersHome();
+  const { handlerSort, handlerSortZa } = SortPokemons();
   const { handlerSortAttack, handlerSortMinAttack } = HandlerSortAttack();
 
   const [isOk, setIsOk] = useState(false);
@@ -27,7 +27,6 @@ function Home() {
   const [allPok, setAllPok] = useState(true);
   const [dbPok, setDbPok] = useState(false);
   const [apiPok, setApiPok] = useState(false);
-  const [ariginal, setOriginal] = useState(false);
   const [orderAZ, setOrderAZ] = useState(false);
   const [orderZA, setOrderZA] = useState(false);
   const [attackMax, setAttackMax] = useState(false);
@@ -88,15 +87,15 @@ function Home() {
   const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5);
   const [minPageNumberLimit, setMinPageNumberLimit] = useState(0);
 
-  const pages = [];
-  for (let i = 1; i < Math.ceil(pokemons.length / itemsPerPage); i++) {
-    pages.push(i);
-  }
-
   const indexOfLastPage = currentPage * itemsPerPage;
   const indexOfFirsttPage = indexOfLastPage - itemsPerPage;
 
   const pokemon = pokemons.slice(indexOfFirsttPage, indexOfLastPage); //esto es lo que hay que renderizar
+
+  const pages = [];
+  for (let i = 1; i <= Math.ceil(pokemons.length / itemsPerPage); i++) {
+    pages.push(i);
+  }
 
   const handlerPage = (event) => {
     setCurrentPage(Number(event.target.id));
@@ -121,151 +120,150 @@ function Home() {
     <>
       {isOk ? (
         <>
-        <br />
-        <div className="botones">
-          <button
-            onClick={() => {
-              handlerAll();
-              setAllPok(true);
-              setFiltro(false);
-              setDbPok(false);
-              setApiPok(false);
-              setOrderAZ(false);
-              setOrderZA(false);
-              setAttackMax(false);
-              setAttackMin(false);
-            }}
-            className={allPok ? "active" : null} 
-          >
-            All pokwmons
-          </button>
-  
-          <button
-            onClick={() => {
-              handlerDb();
-              setAllPok(false);
-              setFiltro(false);
-              setDbPok(true);
-              setApiPok(false);
-              setOrderAZ(false);
-              setOrderZA(false);
-              setAttackMax(false);
-              setAttackMin(false);
-            }}
-            className={dbPok ? "active" : null}
-          >
-            From DB
-          </button>
-          <button
-            onClick={() => {
-              handlerApi();
-              setAllPok(false);
-              setFiltro(false);
-              setDbPok(false);
-              setApiPok(true);
-              setOrderAZ(false);
-              setOrderZA(false);
-              setAttackMax(false);
-              setAttackMin(false);
-            }}
-            className={apiPok ? "active" : null}
-          >
-            From Api
-          </button>
-          <button
-            onClick={() => {
-              handlerSort();
-              setAllPok(false);
-              setFiltro(false);
-              setDbPok(false);
-              setApiPok(false);
-              setOrderAZ(true);
-              setOrderZA(false);
-              setAttackMax(false);
-              setAttackMin(false);
-            }}
-            className={orderAZ ? "active" : null}
-          >
-            Orden A-Z
-          </button>
-          <button
-            onClick={() => {
-              handlerSortZa();
-              setAllPok(false);
-              setFiltro(false);
-              setDbPok(false);
-              setApiPok(false);
-              setOrderAZ(false);
-              setOrderZA(true);
-              setAttackMax(false);
-              setAttackMin(false);
-            }}
-            className={orderZA ? "active" : null}
-          >
-            Orden Z-A
-          </button>
-          <button
-            onClick={() => {
-              handlerSortAttack();
-              setAllPok(false);
-              setFiltro(false);
-              setDbPok(false);
-              setApiPok(false);
-              setOrderAZ(false);
-              setOrderZA(false);
-              setAttackMax(true);
-              setAttackMin(false);
-            }}
-            className={attackMax ? "active" : null}
-          >
-            Orden ataque mayor
-          </button>
-          <button
-            onClick={() => {
-              handlerSortMinAttack();
-              setAllPok(false);
-              setFiltro(false);
-              setDbPok(false);
-              setApiPok(false);
-              setOrderAZ(false);
-              setOrderZA(false);
-              setAttackMax(false);
-              setAttackMin(true);
-            }}
-            className={attackMin ? "active" : null}
-          >
-            Orden menor ataque
-          </button>
-          <button
-            onClick={() => {
-              buttonrFilter();
-              setAllPok(false);
-              setFiltro(true);
-              setDbPok(false);
-              setApiPok(false);
-              setOrderAZ(false);
-              setOrderZA(false);
-              setAttackMax(false);
-              setAttackMin(false);
-            }}
-            className={filtro ? "active" : null}
-          >
-            Filtrar
-          </button>
-          <select
-            id="types"
-            name="types"
-            onChange={handlerFilter}
-            className="select"
-          >
-            <optgroup label="Filtrar pokemons por tipo">
-              {tipos.map((t) => (
-                <option key={t.id} value={t.nombre}>
-                  {t.nombre}
-                </option>
-              ))}
-            </optgroup>
-          </select>
+          <br />
+          <div className="botones">
+            <button
+              onClick={() => {
+                handlerAll();
+                setAllPok(true);
+                setFiltro(false);
+                setDbPok(false);
+                setApiPok(false);
+                setOrderAZ(false);
+                setOrderZA(false);
+                setAttackMax(false);
+                setAttackMin(false);
+              }}
+              className={allPok ? "active" : null}
+            >
+              All pokwmons
+            </button>
+            <button
+              onClick={() => {
+                handlerDb();
+                setAllPok(false);
+                setFiltro(false);
+                setDbPok(true);
+                setApiPok(false);
+                setOrderAZ(false);
+                setOrderZA(false);
+                setAttackMax(false);
+                setAttackMin(false);
+              }}
+              className={dbPok ? "active" : null}
+            >
+              From DB
+            </button>
+            <button
+              onClick={() => {
+                handlerApi();
+                setAllPok(false);
+                setFiltro(false);
+                setDbPok(false);
+                setApiPok(true);
+                setOrderAZ(false);
+                setOrderZA(false);
+                setAttackMax(false);
+                setAttackMin(false);
+              }}
+              className={apiPok ? "active" : null}
+            >
+              From Api
+            </button>
+            <button
+              onClick={() => {
+                handlerSort();
+                setAllPok(false);
+                setFiltro(false);
+                setDbPok(false);
+                setApiPok(false);
+                setOrderAZ(true);
+                setOrderZA(false);
+                setAttackMax(false);
+                setAttackMin(false);
+              }}
+              className={orderAZ ? "active" : null}
+            >
+              Orden A-Z
+            </button>
+            <button
+              onClick={() => {
+                handlerSortZa();
+                setAllPok(false);
+                setFiltro(false);
+                setDbPok(false);
+                setApiPok(false);
+                setOrderAZ(false);
+                setOrderZA(true);
+                setAttackMax(false);
+                setAttackMin(false);
+              }}
+              className={orderZA ? "active" : null}
+            >
+              Orden Z-A
+            </button>
+            <button
+              onClick={() => {
+                handlerSortAttack();
+                setAllPok(false);
+                setFiltro(false);
+                setDbPok(false);
+                setApiPok(false);
+                setOrderAZ(false);
+                setOrderZA(false);
+                setAttackMax(true);
+                setAttackMin(false);
+              }}
+              className={attackMax ? "active" : null}
+            >
+              Orden ataque mayor
+            </button>
+            <button
+              onClick={() => {
+                handlerSortMinAttack();
+                setAllPok(false);
+                setFiltro(false);
+                setDbPok(false);
+                setApiPok(false);
+                setOrderAZ(false);
+                setOrderZA(false);
+                setAttackMax(false);
+                setAttackMin(true);
+              }}
+              className={attackMin ? "active" : null}
+            >
+              Orden menor ataque
+            </button>
+            <button
+              onClick={() => {
+                buttonrFilter();
+                setAllPok(false);
+                setFiltro(true);
+                setDbPok(false);
+                setApiPok(false);
+                setOrderAZ(false);
+                setOrderZA(false);
+                setAttackMax(false);
+                setAttackMin(false);
+              }}
+              className={filtro ? "active" : null}
+            >
+              Filtrar
+            </button>
+            <select
+              id="types"
+              name="types"
+              onChange={handlerFilter}
+              className="select"
+            >
+              <optgroup label="Filtrar pokemons por tipo">
+                {tipos.map((t) => (
+                  <option key={t.id} value={t.nombre}>
+                    {t.nombre}
+                  </option>
+                ))}
+              </optgroup>
+            </select>
           </div>
           <div className="pagination">
             <ul className="pageNumbers">
