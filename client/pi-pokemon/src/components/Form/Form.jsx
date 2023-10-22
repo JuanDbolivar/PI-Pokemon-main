@@ -22,6 +22,18 @@ function Form() {
     types,
   } = useSelector((state) => state.newPokemon);
 
+  const pokLec = {
+    nombre,
+    imagen,
+    vida,
+    ataque,
+    defensa,
+    velocidad,
+    altura,
+    peso,
+    types,
+  };
+
   const {
     handleChange,
     handleIChange,
@@ -54,8 +66,8 @@ function Form() {
   const handleError = (event) => {
     const property = event.target.name;
     const value = event.target.value;
-    setErrors(validation({ ...nombre, [property]: value }));
-    console.log("errors.imagen", errors.imagen);
+    setErrors(validation({ ...pokLec, [property]: value }));
+    console.log("errors.types", errors.types);
   };
   return (
     <>
@@ -92,8 +104,13 @@ function Form() {
           name="imagen"
           required
           value={imagen}
-          onChange={handleIChange}
+          onChange={(event) => {
+            handleIChange(event);
+            handleError(event);
+          }}
         />
+        {errors.imagen ? <p className="error">{errors.imagen}</p> : null}
+
         <br />
         <label htmlFor="vida"> Nivel de vida: </label>
         <input
@@ -101,8 +118,14 @@ function Form() {
           name="vida"
           required
           value={vida}
-          onChange={handleVChange}
+          onChange={(event) => {
+            handleVChange(event);
+            handleError(event);
+          }}
+          min={0}
         />
+        {errors.vida ? <p className="error">{errors.vida}</p> : null}
+
         <br />
         <label htmlFor="ataque">Nivel de ataque: </label>
         <input
@@ -110,8 +133,14 @@ function Form() {
           name="ataque"
           required
           value={ataque}
-          onChange={handleAChange}
+          onChange={(event) => {
+            handleAChange(event);
+            handleError(event);
+          }}
+          min={0}
         />
+        {errors.ataque ? <p className="error">{errors.ataque}</p> : null}
+
         <br />
         <label htmlFor="defensa">Nivel de defensa: </label>
         <input
@@ -119,8 +148,14 @@ function Form() {
           name="defensa"
           required
           value={defensa}
-          onChange={handleDChange}
+          onChange={(event) => {
+            handleDChange(event);
+            handleError(event);
+          }}
+          min={0}
         />
+        {errors.defensa ? <p className="error">{errors.defensa}</p> : null}
+
         <br />
         <label htmlFor="velocidad">Velocidad: </label>
         <input
@@ -128,6 +163,7 @@ function Form() {
           name="velocidad"
           value={velocidad}
           onChange={handleVelChange}
+          min={0}
         />
         <br />
         <label htmlFor="altura">Altura: </label>
@@ -136,6 +172,7 @@ function Form() {
           name="altura"
           value={altura}
           onChange={handleAlChange}
+          min={0}
         />
         <br />
         <label htmlFor="peso">Peso: </label>
@@ -144,6 +181,7 @@ function Form() {
           name="peso"
           value={peso}
           onChange={handlePChange}
+          min={0}
         />
         <br />
         <label htmlFor="types">
@@ -154,7 +192,10 @@ function Form() {
               id="types"
               name="types"
               // value={types}
-              onChange={handleTChange}
+              onChange={(event) => {
+                handleTChange(event);
+                handleError(event);
+              }}
               className="selectForm"
             >
               <optgroup label="tipos">
@@ -170,13 +211,27 @@ function Form() {
         <input
           type="text"
           name="types"
-          // value={types}
-          defaultValue={types}
-          disabled
+          value={types}
+          // disabled
           className="typesInput"
         />
+        {errors.types ? <p className="error">{errors.types}</p> : null}
+
         <br />
-        <button>Agregar pokemon</button>
+        <button
+          disabled={
+            errors.types ||
+            errors.nombre ||
+            errors.imagen ||
+            errors.vida ||
+            errors.ataque ||
+            errors.defensa
+              ? true
+              : false
+          }
+        >
+          Agregar pokemon
+        </button>
       </form>
     </>
   );

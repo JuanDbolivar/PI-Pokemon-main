@@ -8,7 +8,7 @@
 .imgBack {
   position: absolute;
   width: 100vw;
-  height: 145vh;
+  height: 195vh;
   z-index: -1;
 }
 
@@ -60,10 +60,14 @@ form select[type]:focus {
 }
 
 .error{
-  color: red;
+  text-align: center;
+  border-radius: 8px;
+  background: repeating-linear-gradient(180deg, rgb(243, 39, 39), rgb(29, 29, 29), white 25px);
+  color: white;
 }
 
-.typesInpu{
-  background-color: rgb(121, 21, 21);
+.typesInput{
+  color: white;
+  background-color: rgb(230, 73, 73);
   border-color: black;
 }
