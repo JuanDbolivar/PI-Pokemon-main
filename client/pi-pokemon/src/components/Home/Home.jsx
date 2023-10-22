@@ -51,13 +51,13 @@ function Home() {
         const { data } = await axios("http://localhost:3001/poquemons/db");
         if (data) {
           const apiIds = data.map((pok) => pok.id); //map database
-          const pokemonsIds = pokemons.map((pok) => pok.id); //map estado redux
+          const pokemonsIds = pokemonsCopia.map((pok) => pok.id); //map estado redux
           const duplicates = apiIds.filter((id) => !pokemonsIds.includes(id));
           if (duplicates.length > 0) {
             const poke = data.filter((pok) => {
               return duplicates.some((dPok) => pok.id === dPok);
             });
-            const allPok = [...poke, ...pokemons];
+            const allPok = [...poke, ...pokemonsCopia];
             const allPokCopia = [...poke, ...pokemonsCopia];
             dispatch(setPokemon(allPok));
             dispatch(setPokemonCopia(allPokCopia));
@@ -257,6 +257,7 @@ function Home() {
               className="select"
             >
               <optgroup label="Filtrar pokemons por tipo">
+                <option value=""> All types</option>
                 {tipos.map((t) => (
                   <option key={t.id} value={t.nombre}>
                     {t.nombre}

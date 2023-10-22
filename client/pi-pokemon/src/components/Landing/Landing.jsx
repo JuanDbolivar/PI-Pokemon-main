@@ -1,5 +1,7 @@
 import "./Landing.css";
 import axios from "axios";
+import pokeClose from "../../pokeballimagens/pokeballClose.png";
+import pokeOpen from "../../pokeballimagens/pokeballOpen.png";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -59,12 +61,11 @@ function Landing() {
       <div className="container">
         <img src="https://i.gifer.com/CxOP.gif" alt="background" />
 
-        <button onClick={buttonHandler} className="button">
-          <img
-            src="https://icon-library.com/images/small-pokeball-icon/small-pokeball-icon-5.jpg"
-            alt="button "
-            className="ingreso"
-          />
+        <button onClick={buttonHandler} className="buton">
+          <div className="imageCont">
+            <img src={pokeOpen} alt="button "  />
+            <img src={pokeClose} alt="button " className="pokeOpen" />
+          </div>
         </button>
       </div>
     </>
