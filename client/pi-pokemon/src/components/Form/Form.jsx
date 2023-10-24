@@ -1,9 +1,9 @@
 import "./Form.css";
 import validation from "./validation";
-import { useSelector, useDispatch } from "react-redux";
-import { unSetPok } from "../../redux/counters/pokemonCreate/pokemonCreateSlice";
-import { HandlerForm } from "../../handlers/HandlerForm";
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { HandlerForm } from "../../handlers/HandlerForm";
+import { unSetPok } from "../../redux/counters/pokemonCreate/pokemonCreateSlice";
 
 function Form() {
   const dispatch = useDispatch();
@@ -67,12 +67,11 @@ function Form() {
     const property = event.target.name;
     const value = event.target.value;
     setErrors(validation({ ...pokLec, [property]: value }));
-    console.log("errors.types", errors.types);
   };
   return (
     <>
       <img
-        src="https://img.freepik.com/premium-photo/moon-clouds-wallpaper_802639-6388.jpg?w=740"
+        src="https://w0.peakpx.com/wallpaper/397/77/HD-wallpaper-pokeballs-games-gaming-great-ball-master-ball-nintendo-poke-ball-pokeball-pokemon-ultra-ball.jpg"
         alt="background"
         className="imgBack"
       />
@@ -212,8 +211,8 @@ function Form() {
           type="text"
           name="types"
           value={types}
-          // disabled
           className="typesInput"
+          readOnly
         />
         {errors.types ? <p className="error">{errors.types}</p> : null}
 

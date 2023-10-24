@@ -18,7 +18,7 @@ const getTypes = async (req, res) => {
       res.status(500).json({ message: "info guardada" });
     }
     // res.status(404).json({ error: error.message });
-    console.log("error", error.message);
+    console.log("error", error.message)
   }
 };
 

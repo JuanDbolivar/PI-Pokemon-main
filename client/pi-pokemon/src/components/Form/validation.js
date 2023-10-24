@@ -4,17 +4,10 @@ const validation = ({
   vida,
   ataque,
   defensa,
-  velocidad,
-  altura,
-  peso,
   types,
 }) => {
-  // /^[a-z0-9_-]{3,16}$/
-  // (https):\/\/([\w+?\.\w+])+([a-zA-Z0-9\~\!\@\#\$\%\^\&\*\(\)_\-\=\+\\\/\?\.\:\;\'\]*)?$
-  // const tipos = types.join();
   const regexName = /^[A-Za-z0-9 ]{3,20}$/;
   const regexImagen = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/;
-  // const regextypes = /^[A-Za-z0-9,]{3,40}$/;
 
   let errors = {};
 

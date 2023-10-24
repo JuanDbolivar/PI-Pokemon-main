@@ -1,6 +1,6 @@
 import "./Nav.css";
-import { useState } from "react";
 import SearchBar from "../SearchBar/SearchBar";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 function Nav() {

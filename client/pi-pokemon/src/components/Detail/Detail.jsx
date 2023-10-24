@@ -1,10 +1,11 @@
 import "./Detail.css";
+import axios from "axios";
 import Loading from "../Loading/Loading";
+import quienEs from "../../pokeballimagens/quienEs.png";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setPokemonsId } from "../../redux/counters/PokemonId/pokemonIdSlice";
-import { useEffect, useState } from "react";
-import axios from "axios";
 
 function Detail() {
   const [loading, setLoading] = useState(true);
@@ -40,7 +41,11 @@ function Detail() {
         alt="background"
         className="backgroundImg"
       />
-      <img src={pokemonById.imagen} alt="" className="poke"/>
+      {pokemonById.imagen ? (
+        <img src={pokemonById.imagen} alt="" className="poke" />
+      ) : (
+        <img src={quienEs} className="poke" />
+      )}
       <div className="descripcion">
         <h3>{pokemonById.id}</h3>
         <h1> {pokemonById.nombre}</h1>

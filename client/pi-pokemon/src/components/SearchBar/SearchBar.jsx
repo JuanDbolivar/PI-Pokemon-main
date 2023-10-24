@@ -1,13 +1,14 @@
 import "./SearchBar.css";
+import axios from "axios";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setPokemonName } from "../../redux/counters/PokemonName/PokemonName";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 
 function SearchBar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  
   const [name, setName] = useState("");
 
   const handleChange = (event) => {
@@ -26,7 +27,7 @@ function SearchBar() {
         window.alert("personaje no existe");
       }
     } catch (error) {
-      console.log(error.message);
+      console.error(error.message);
     }
   };
 

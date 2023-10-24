@@ -25,14 +25,9 @@ const obtenerInformacionPokemon = async (response, query) => {
       const pokemonId = informaciónPokemonById(pokemonInfo);
       return pokemonId;
     }
-    // else {
-    //   const pokemonId = await Pokemon.findOne({ where: { nombre: query } });
-    //   return pokemonId;
-    // }
   }
 
   //* pokemones completos
-  //pokemonList=response
   try {
     const promises = response.map((pok) => axios.get(pok.url));
 
@@ -113,7 +108,6 @@ const postearPokemons = async ({
     const tiposAsociados = await Type.findAll({
       where: { nombre: types[0] },
     });
-    console.log(types);
     await newPokemon.addType(tiposAsociados);
     return newPokemon;
   } catch (error) {

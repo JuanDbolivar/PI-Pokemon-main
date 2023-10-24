@@ -1,7 +1,7 @@
 .cardCon {
   position: relative;
   width: 250px;
-  height: 300px;
+  height: 325px;
   margin: 30px;
 }
 
@@ -17,10 +17,12 @@
 }
 
 .text {
+  background: content-box;
   background-color: rgb(49, 48, 46);
   width: 230px;
-  height: 100px;
+  min-height: 100px;
+  height: auto;
   padding: 0 10px 0;
   color: red;
-  
+  word-wrap: break-word;
 }

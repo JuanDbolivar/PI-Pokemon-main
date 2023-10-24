@@ -1,8 +1,8 @@
 import "./PokByName.css";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux"; //* con este useSelector yo leo el estado global y extrago lo que requiero
-import { Link } from "react-router-dom";
 import Loading from "../Loading/Loading";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux"; //* con este useSelector yo leo el estado global y extrago lo que requiero
 
 function PokByName() {
   const { pokemonByName } = useSelector((state) => state.pokemoName);

@@ -6,7 +6,7 @@ import {
 
 export const HandlerSortAttack = () => {
   const dispatch = useDispatch();
-  const { pokemons, apiPokemon ,pokemonsCopia} = useSelector((state) => state.pokemon);
+  const { pokemons, apiPokemon } = useSelector((state) => state.pokemon);
 
   const sortPokemonByName = (order) => {
     return (a, b) => {

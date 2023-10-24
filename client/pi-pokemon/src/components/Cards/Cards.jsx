@@ -1,16 +1,13 @@
 import "./Cards.css";
-//import { useSelector } from "react-redux"; //* con este useSelector yo leo el estado global y extrago lo que requiero
-//* se puede llamar en el componente que lo necesite
 import Card from "../Card/Card";
 
 function Cards({ pokemon }) {
-  // const { pokemons } = useSelector((state) => state.pokemon);
 
   return (
     <>
       <div className="cards">
         <img
-          src="https://img.freepik.com/premium-photo/moon-clouds-wallpaper_802639-6388.jpg?w=740"
+          src="https://w0.peakpx.com/wallpaper/344/959/HD-wallpaper-pokeballs-3d-nintendo-poke-balls-pokeball-pokemon.jpg"
           alt="background"
           className="imgCards"
         />

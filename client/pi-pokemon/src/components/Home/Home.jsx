@@ -2,12 +2,12 @@ import "./Home.css";
 import Cards from "../Cards/Cards";
 import Loading from "../Loading/Loading";
 import axios from "axios";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { SortPokemons } from "../../handlers/SortName/SortPokemons";
 import { HandlerSortAttack } from "../../handlers/SortAttack/HandlerSortAttack";
 import { HandlersHome } from "../../handlers/Home/HandlersHome";
 import { ViewsApiDb } from "../../handlers/ViewsApiDb/ViewsApiDb";
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import {
   setPokemon,
   setPokemonCopia,

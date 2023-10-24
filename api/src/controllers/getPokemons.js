@@ -1,6 +1,6 @@
 require("dotenv").config();
-const { URL } = process.env;
-const { URL_ID } = process.env;
+const { URL, URL_ID } = process.env;
+// const {URL_ID } = process.env;
 
 const axios = require("axios");
 const { obtenerInformacionPokemon } = require("../handlers/handlerPokemon");

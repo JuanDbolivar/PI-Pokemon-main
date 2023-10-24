@@ -9,7 +9,6 @@ import {
   setPokemon,
   setPokemonCopia,
   // setApiPokemon,
-  // setApiPokemonCopia,
 } from "../../redux/counters/Pokemon/pokemonSlice";
 import { setTypes } from "../../redux/counters/Type/typeSlice";
 
@@ -25,7 +24,7 @@ function Landing() {
         dispatch(setTypes(data));
       }
     } catch (error) {
-      console.log(error.message);
+      console.error(error.message);
     }
     navigate("/home");
   };
@@ -50,7 +49,7 @@ function Landing() {
           dispatch(setPokemonCopia(data));
         }
       } catch (error) {
-        console.log(error.message);
+        console.error(error.message);
       }
     };
     LandingToHome();
