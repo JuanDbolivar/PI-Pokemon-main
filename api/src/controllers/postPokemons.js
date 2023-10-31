@@ -27,7 +27,7 @@ const postPokemons = async (req, res) => {
     });
     res.status(201).json(`Pokemon ${pokemon.nombre} creado exitosamente`);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(404).json("pokemon existente");
   }
 };
 

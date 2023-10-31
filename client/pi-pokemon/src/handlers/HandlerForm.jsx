@@ -10,6 +10,7 @@ import {
   setPokAltura,
   setPokPeso,
   setPokTypes,
+  unSetTypes,
   unSetPok,
 } from "../redux/counters/pokemonCreate/pokemonCreateSlice";
 
@@ -77,6 +78,11 @@ export const HandlerForm = () => {
     dispatch(setPokTypes({ [property]: value }));
   };
 
+  const handleClearTypesChange = (event) => {
+    event.preventDefault();
+    dispatch(unSetTypes());
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -94,7 +100,7 @@ export const HandlerForm = () => {
       window.alert(data);
       dispatch(unSetPok());
     } catch (error) {
-      window.alert(error.message);
+      window.alert("pokemon existente");
     }
   };
 
@@ -109,5 +115,6 @@ export const HandlerForm = () => {
     handleAlChange,
     handlePChange,
     handleTChange,
+    handleClearTypesChange,
   };
 };

@@ -43,6 +43,11 @@ export const newPokemonSlice = createSlice({
     setPokTypes: (state, action) => {
       state.types = [...state.types, action.payload.types];
     },
+
+    unSetTypes: (state) => {
+      state.types = [];
+    },
+
     unSetPok: (state) => {
       state.nombre = "";
       state.imagen = "";
@@ -67,6 +72,7 @@ export const {
   setPokAltura,
   setPokPeso,
   setPokTypes,
+  unSetTypes,
   unSetPok,
 } = newPokemonSlice.actions;
 

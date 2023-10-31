@@ -45,6 +45,7 @@ function Form() {
     handlePChange,
     handleTChange,
     handleSubmit,
+    handleClearTypesChange,
   } = HandlerForm();
 
   useEffect(() => {
@@ -68,6 +69,7 @@ function Form() {
     const value = event.target.value;
     setErrors(validation({ ...pokLec, [property]: value }));
   };
+
   return (
     <>
       <img
@@ -214,6 +216,14 @@ function Form() {
           className="typesInput"
           readOnly
         />
+        <button
+          onClick={(event) => {
+            handleClearTypesChange(event);
+            setErrors(errors.types = "");
+          }}
+        >
+          Limpiar
+        </button>
         {errors.types ? <p className="error">{errors.types}</p> : null}
 
         <br />
@@ -224,7 +234,8 @@ function Form() {
             errors.imagen ||
             errors.vida ||
             errors.ataque ||
-            errors.defensa
+            errors.defensa ||
+            types.length === 0
               ? true
               : false
           }

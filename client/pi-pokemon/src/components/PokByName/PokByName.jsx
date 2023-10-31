@@ -20,7 +20,7 @@ function PokByName() {
     <>
       <div className="nameContainer">
         <img
-          src="https://img.freepik.com/premium-photo/moon-clouds-wallpaper_802639-6388.jpg?w=740"
+          src="https://w0.peakpx.com/wallpaper/344/959/HD-wallpaper-pokeballs-3d-nintendo-poke-balls-pokeball-pokemon.jpg"
           alt="background"
           className="imgname"
         />
