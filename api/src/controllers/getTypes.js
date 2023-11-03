@@ -10,15 +10,14 @@ const getTypes = async (req, res) => {
     const { data } = await axios(URL_TYPES);
     const response = data.results;
     const types = await obtenerTypes(response);
-    const typeBd = await Type.bulkCreate(types);
+    await Type.bulkCreate(types);
 
     res.status(200).json({ message: "Info guardada con exito" });
   } catch (error) {
     if (error.message == "Validation error") {
       res.status(500).json({ message: "info guardada" });
     }
-    // res.status(404).json({ error: error.message });
-    console.log("error", error.message)
+    console.log("error", error.message);
   }
 };
 

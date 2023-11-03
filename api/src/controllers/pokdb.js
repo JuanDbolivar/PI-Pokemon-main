@@ -1,8 +1,16 @@
-const { Pokemon } = require("../db");
+const { Pokemon, Type } = require("../db");
 
 const pokdb = async (req, res) => {
   try {
-    const response = await Pokemon.findAll();
+    const response = await Pokemon.findAll({
+      include: {
+        model: Type,
+        attributes: ["nombre"],
+        through: {
+          attributes: []
+        },
+      },
+    });
 
     res.status(200).json(response);
   } catch (error) {

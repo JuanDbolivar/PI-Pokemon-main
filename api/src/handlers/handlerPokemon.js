@@ -102,13 +102,28 @@ const postearPokemons = async ({
       velocidad,
       altura,
       peso,
-      types,
     };
+
     const newPokemon = await Pokemon.create(pokemon);
-    const tiposAsociados = await Type.findAll({
-      where: { nombre: types[0] },
-    });
-    await newPokemon.addType(tiposAsociados);
+
+    //  newPokemon.addTypes(types); ==> de esta manera solo debemos pasarle un array de IDs
+    // estos IDs los enviamos desde el form del front 
+
+    const addTypesToPokemon = async () => {
+      for (const tipo of types) {
+        const tiposAsociados = await Type.findAll({
+          where: { nombre: tipo },
+        });
+        await newPokemon.addType(tiposAsociados);
+      }
+    }
+    addTypesToPokemon()
+
+    // const tiposAsociados = await Type.findAll({
+    //   where: { nombre: types[0] },
+    // });
+    // await newPokemon.addType(tiposAsociados);
+
     return newPokemon;
   } catch (error) {
     throw new Error("pokemon existente");

@@ -42,10 +42,10 @@ module.exports = (sequelize) => {
       peso: {
         type: DataTypes.INTEGER,
       },
-      types: {
-        type: DataTypes.ARRAY(DataTypes.STRING), 
-        allowNull: false,
-      },
+      // types: {
+      //   type: DataTypes.ARRAY(DataTypes.INTEGER), 
+      //   allowNull: false,
+      // },
     },
     {
       timestamps: false,

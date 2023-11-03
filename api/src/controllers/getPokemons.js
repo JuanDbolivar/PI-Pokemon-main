@@ -27,7 +27,7 @@ const getPokemons = async (req, res) => {
               throw new Error("Este pokemon no existe o no ha sido creado");
             }
           } catch (error) {
-            throw error;
+            throw error.message;
           }
         }
       }

@@ -17,16 +17,28 @@ const getPokemonsById = async (req, res) => {
   } catch (apiError) {
     try {
       const localPokemon = await Pokemon.findByPk(id, {
-        include: Type,
+        include: {
+          model: Type,
+          attributes: ["nombre"],
+          through: {
+            attributes: [],
+          },
+        },
       });
 
       if (localPokemon) {
-        const pokemon = [];
-        pokemon.push(localPokemon);
-
-        res.status(200).json(pokemon);
-      } else {
-        throw new Error("Pokémon no encontrado");
+        const pokemon = { ...localPokemon };
+        if (pokemon.dataValues.Types) {
+          pokemon.dataValues.types = pokemon.dataValues.Types.map(
+            (tipo) => tipo.nombre
+          );
+          delete pokemon.dataValues.Types;
+          const pokeDb = [];
+          pokeDb.push(pokemon.dataValues);
+          res.status(200).json(pokeDb);
+        } else {
+          throw new Error("Pokémon no encontrado");
+        }
       }
     } catch (error) {
       res.status(404).json({ error: error.message });
