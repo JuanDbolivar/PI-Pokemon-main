@@ -7,8 +7,9 @@
 
 .imgCards {
   position: absolute;
+  top: 27%;
   width: 100vw;
-  height: 190vh;
+  height: 190svh;
   z-index: -1;
 }
 

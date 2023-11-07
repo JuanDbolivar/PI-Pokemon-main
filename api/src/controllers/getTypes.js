@@ -15,9 +15,9 @@ const getTypes = async (req, res) => {
     res.status(200).json({ message: "Info guardada con exito" });
   } catch (error) {
     if (error.message == "Validation error") {
-      res.status(500).json({ message: "info guardada" });
+      res.status(400).json("info guardada" );
     }
-    console.log("error", error.message);
+    // console.log("error", error.message)
   }
 };
 

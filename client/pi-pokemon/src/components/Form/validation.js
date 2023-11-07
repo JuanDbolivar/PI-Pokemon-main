@@ -32,14 +32,14 @@ const validation = ({
     errors.types = "Este campo no puede estar vacio";
   }
 
-  if (vida == 0 || !vida) {
-    errors.vida = "Este campo no puede ser cero";
+  if (vida <= 0 || !vida) {
+    errors.vida = "Este campo no puede tener numeros negativos y debe ser mayor a 0";
   }
-  if (ataque == 0 || !ataque) {
-    errors.ataque = "Este campo no puede ser cero";
+  if (ataque <= 0 || !ataque) {
+    errors.ataque = "Este campo no puede tener numeros negativos y debe ser mayor a 0";
   }
-  if (defensa == 0 || !defensa) {
-    errors.defensa = "Este campo no puede ser cero";
+  if (defensa <= 0 || !defensa) {
+    errors.defensa = "Este campo no puede tener numeros negativos y debe ser mayor a 0";
   }
 
   return errors;

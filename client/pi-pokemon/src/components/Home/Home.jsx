@@ -4,27 +4,29 @@ import Loading from "../Loading/Loading";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { HandlersLanding } from "../../handlers/Landing/HandlersLanding";
 import { SortPokemons } from "../../handlers/SortName/SortPokemons";
 import { HandlerSortAttack } from "../../handlers/SortAttack/HandlerSortAttack";
 import { HandlersHome } from "../../handlers/Home/HandlersHome";
 import { ViewsApiDb } from "../../handlers/ViewsApiDb/ViewsApiDb";
 import {
   setPokemon,
-  setPokemonCopia,
-  setApiPokemon,
-  setApiPokemonCopia,
+  // setPokemonCopia,
+  // setApiPokemon,
+  // setApiPokemonCopia,
 } from "../../redux/counters/Pokemon/pokemonSlice";
 
 function Home() {
   const dispatch = useDispatch();
+  const { pokeDb } = HandlersLanding();
   const { handlerAll, handlerApi, handlerDb } = ViewsApiDb();
   const { handlerFilter, buttonrFilter } = HandlersHome();
   const { handlerSort, handlerSortZa } = SortPokemons();
   const { handlerSortAttack, handlerSortMinAttack } = HandlerSortAttack();
 
+  const [allPok, setAllPok] = useState(true);
   const [isOk, setIsOk] = useState(false);
   const [filtro, setFiltro] = useState(false);
-  const [allPok, setAllPok] = useState(true);
   const [dbPok, setDbPok] = useState(false);
   const [apiPok, setApiPok] = useState(false);
   const [orderAZ, setOrderAZ] = useState(false);
@@ -36,55 +38,63 @@ function Home() {
   const { pokemons, pokemonsCopia } = useSelector((state) => state.pokemon);
 
   useEffect(() => {
-    if (pokemons.length) {
+    if (pokemons.length > 3) {
       setIsOk(true);
     }
   }, [pokemons]);
 
   useEffect(() => {
-    dispatch(setPokemon(pokemonsCopia));
+    pokeDb();
   }, []);
 
-  useEffect(() => {
-    const pokeDb = async () => {
-      try {
-        const { data } = await axios("http://localhost:3001/poquemons/db");
-        if (data) {
-          const newData = data.map((pok) => {
-            pok.types = pok.Types.map((tipo) => tipo.nombre);
-            delete pok.Types
-            return pok
-          });
-          if (newData) {
-            const apiIds = newData.map((pok) => pok.id); //map database
-            const pokemonsIds = pokemonsCopia.map((pok) => pok.id); //map estado redux
-            const duplicates = apiIds.filter((id) => !pokemonsIds.includes(id));
-            if (duplicates.length > 0) {
-              const poke = newData.filter((pok) => {
-                return duplicates.some((dPok) => pok.id === dPok);
-              });
-              const allPok = [...poke, ...pokemonsCopia];
-              const allPokCopia = [...poke, ...pokemonsCopia];
-              dispatch(setPokemon(allPok));
-              dispatch(setPokemonCopia(allPokCopia));
-              dispatch(setApiPokemon(newData)); //pokemons de la base de datos
-              dispatch(setApiPokemonCopia(newData));
-            } else {
-              const allPok = [...pokemons];
-              const allPokCopia = [...pokemonsCopia];
-              dispatch(setPokemon(allPok));
-              dispatch(setPokemonCopia(allPokCopia));
-              dispatch(setApiPokemon(newData)); //pokemons de la base de datos
-              dispatch(setApiPokemonCopia(newData));
-            }
-          }
-        }
+  // useEffect(() => {
+  //   const pokeDb = async () => {
+  //     try {
+  //       const { data } = await axios("http://localhost:3001/poquemons/db");
+  //       if (data) {
+  //         const newData = data.map((pok) => {
+  //           pok.types = pok.Types.map((tipo) => tipo.nombre);
+  //           delete pok.Types;
+  //           return pok;
+  //         });
+  //         if (newData) {
+  //           const apiIds = newData.map((pok) => pok.id); //map database
+  //           const pokemonsIds = pokemonsCopia.map((pok) => pok.id); //map estado redux
+  //           const duplicates = apiIds.filter((id) => !pokemonsIds.includes(id));
+  //           if (duplicates.length > 0) {
+  //             const poke = newData.filter((pok) => {
+  //               return duplicates.some((dPok) => pok.id === dPok);
+  //             });
+  //             const allPok = [...poke, ...pokemonsCopia];
+  //             const allPokCopia = [...poke, ...pokemonsCopia];
+  //             dispatch(setPokemon(allPok));
+  //             dispatch(setPokemonCopia(allPokCopia));
+  //             dispatch(setApiPokemon(newData)); //pokemons de la base de datos
+  //           } else {
+  //             const allPok = [...pokemons];
+  //             const allPokCopia = [...pokemonsCopia];
+  //             dispatch(setPokemon(allPok));
+  //             dispatch(setPokemonCopia(allPokCopia));
+  //             dispatch(setApiPokemon(newData)); //pokemons de la base de datos
+  //           }
+  //         }
+  //       }
+  //     } catch (error) {
+  //       console.error("error", error.message);
+  //     }
+  //   };
+  //   pokeDb();
+  // }, []);
 
-      } catch (error) {
-        console.error("error", error.message);
-      }
-    };
-    pokeDb();
+  // if (allPok === true) {
+  //   dispatch(setPokemon(pokemonsCopia));
+  // }
+
+  useEffect(() => {
+    handlerAll();
+    if (allPok === true) {
+      dispatch(setPokemon(pokemonsCopia));
+    }
   }, []);
 
   //***************************** PAGINACION *********************** */

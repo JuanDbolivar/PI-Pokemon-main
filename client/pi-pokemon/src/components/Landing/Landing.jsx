@@ -2,20 +2,23 @@ import "./Landing.css";
 import axios from "axios";
 import pokeClose from "../../pokeballimagens/pokeballClose.png";
 import pokeOpen from "../../pokeballimagens/pokeballOpen.png";
+import { HandlersLanding } from "../../handlers/Landing/HandlersLanding";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
   setPokemon,
   setPokemonCopia,
-  // setApiPokemon,
 } from "../../redux/counters/Pokemon/pokemonSlice";
 import { setTypes } from "../../redux/counters/Type/typeSlice";
 
 function Landing() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const { pokemons } = useSelector((state) => state.pokemon);
+  const { apiPokemon, pokemons } = useSelector((state) => state.pokemon);
+  const { tipos } = useSelector((state) => state.types);
+
+  const { pokeDb } = HandlersLanding();
 
   const buttonHandler = async () => {
     try {
@@ -23,6 +26,7 @@ function Landing() {
       if (data) {
         dispatch(setTypes(data));
       }
+      pokeDb();
     } catch (error) {
       console.error(error.message);
     }
@@ -30,29 +34,42 @@ function Landing() {
   };
 
   useEffect(() => {
-    const callTypes = async () => {
-      try {
-        await axios("http://localhost:3001/types");
-      } catch (error) {
-        console.error("error", error.message);
-      }
-    };
-    callTypes();
+    if (tipos.length === 0) {
+      const callTypes = async () => {
+        try {
+          const { data } = await axios("http://localhost:3001/types");
+          console.log("data", data);
+          if (data) {
+            const { data } = await axios("http://localhost:3001/types/db");
+            if (data) {
+              dispatch(setTypes(data));
+            }
+          }
+        } catch (error) {
+          console.error("error", error.message);
+        }
+      };
+      callTypes();
+    }
   }, []);
 
   useEffect(() => {
-    const LandingToHome = async () => {
-      try {
-        const { data } = await axios("http://localhost:3001/poquemons/");
-        if (data) {
-          dispatch(setPokemon(data));
-          dispatch(setPokemonCopia(data));
+    // if (pokemons.length === 0) {
+      const LandingToHome = async () => {
+        try {
+          const { data } = await axios("http://localhost:3001/poquemons/");
+          if (data) {
+            const allPok = [...apiPokemon, ...data];
+
+            dispatch(setPokemon(allPok));
+            dispatch(setPokemonCopia(allPok));
+          }
+        } catch (error) {
+          console.error(error.message);
         }
-      } catch (error) {
-        console.error(error.message);
-      }
-    };
-    LandingToHome();
+      };
+      LandingToHome();
+    // }
   }, []);
 
   return (
@@ -62,7 +79,7 @@ function Landing() {
 
         <button onClick={buttonHandler} className="buton">
           <div className="imageCont">
-            <img src={pokeOpen} alt="button "  />
+            <img src={pokeOpen} alt="button " />
             <img src={pokeClose} alt="button " className="pokeOpen" />
           </div>
         </button>
