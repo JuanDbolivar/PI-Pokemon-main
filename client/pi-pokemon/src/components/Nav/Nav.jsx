@@ -16,7 +16,6 @@ function Nav() {
         onClick={() => {
           setHome(true);
           setForm(false);
-
         }}
       >
         <span className={home ? "lActive" : null}>Home</span>
@@ -28,14 +27,13 @@ function Nav() {
         onClick={() => {
           setForm(true);
           setHome(false);
-
         }}
       >
-        <span className={form ? "lActive" : null}>Crear pokemon</span>
+        <span className={form ? "lActive" : null}>Create pokemon</span>
       </Link>
 
       <Link to={"/"} className="linkS">
-        <span> SALIR</span>
+        <span> EXIT</span>
       </Link>
     </div>
   );

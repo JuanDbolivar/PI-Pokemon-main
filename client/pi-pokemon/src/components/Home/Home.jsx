@@ -1,7 +1,7 @@
 import "./Home.css";
 import Cards from "../Cards/Cards";
 import Loading from "../Loading/Loading";
-import axios from "axios";
+// import axios from "axios";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { HandlersLanding } from "../../handlers/Landing/HandlersLanding";
@@ -202,7 +202,7 @@ function Home() {
               }}
               className={orderAZ ? "active" : null}
             >
-              Orden A-Z
+              Order A-Z
             </button>
             <button
               onClick={() => {
@@ -218,7 +218,7 @@ function Home() {
               }}
               className={orderZA ? "active" : null}
             >
-              Orden Z-A
+              Order Z-A
             </button>
             <button
               onClick={() => {
@@ -234,7 +234,7 @@ function Home() {
               }}
               className={attackMax ? "active" : null}
             >
-              Orden ataque mayor
+              Order for major attack
             </button>
             <button
               onClick={() => {
@@ -250,7 +250,7 @@ function Home() {
               }}
               className={attackMin ? "active" : null}
             >
-              Orden menor ataque
+              Order for minor attack
             </button>
             <button
               onClick={() => {
@@ -266,7 +266,7 @@ function Home() {
               }}
               className={filtro ? "active" : null}
             >
-              Filtrar
+              Filter
             </button>
             <select
               id="types"

@@ -8,7 +8,7 @@ import { setPokemonName } from "../../redux/counters/PokemonName/PokemonName";
 function SearchBar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
   const [name, setName] = useState("");
 
   const handleChange = (event) => {
@@ -33,7 +33,9 @@ function SearchBar() {
 
   return (
     <>
-      <label htmlFor="pokemon" className="searchLabel">buscar</label>
+      <label htmlFor="pokemon" className="searchLabel">
+        Search
+      </label>
       <input
         type="text"
         name="pokemon"
@@ -47,7 +49,8 @@ function SearchBar() {
           onClick={() => {
             onSearch(name);
           }}
-        className="searchButton">
+          className="searchButton"
+        >
           🔍
         </button>
       ) : null}
